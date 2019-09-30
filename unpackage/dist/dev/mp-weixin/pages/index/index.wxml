@@ -1,0 +1,1 @@
+<view class="content"><image hidden="{{!(show)}}" class="logo animated bounceIn fast" src="/static/logo.png"></image><view class="text-area"><text data-event-opts="{{[['tap',[['e0',['$event']]]]]}}" class="title" bindtap="__e">{{title}}</text></view></view>
