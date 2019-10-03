@@ -4710,5 +4710,62 @@ to {
 }
 }
 /* 自定义图标库 */
+@font-face {font-family: "iconfont";
+  src: url('data:application/x-font-woff2;charset=utf-8;base64,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') format('woff2')
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-62:before {
+  content: "\E64B";
+}
+.icon-saomiao:before {
+  content: "\E623";
+}
+.icon-fenlei:before {
+  content: "\E609";
+}
+.icon-xihuan:before {
+  content: "\E630";
+}
+.icon-shouye:before {
+  content: "\E6C9";
+}
+.icon-gouwuche:before {
+  content: "\E67E";
+}
+.icon-wode:before {
+  content: "\E60C";
+}
+/* UI基础库 */
 /* 公共样式 */
+/* 设置全局样式 */
+/* (1) 页面高度100%,默认字体28upx,默认行高1.8,背景色白色 */
+page {
+	height: 100%;
+	font-size: 28rpx;
+	line-height: 1.8;
+	background: #FFFFFF;
+}
+/* (2) 图片的默认宽度100% */
+image {
+	width: 100%;
+}
+/* (3) 项目的主色调 */
+/* 主背景色-橙色 */
+.main-bg-color { background: #FD6801;
+}
+/* 主点击背景色-淡橙色 */
+.main-bg-hover-color { background: rgba(253, 104, 1, 0.85);
+}
+/* 主字体颜色-橙色 */
+.main-text-color { color: #FD6801;
+}
+/* 主边框颜色-灰色 */
+.main-border-color { border-color: #F1F1F1;
+}
 

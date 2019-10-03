@@ -1,0 +1,1 @@
+<view><scroll-view scroll-x="true"><view style="width:200rpx;border:1px solid red;">1</view><view style="width:200rpx;border:1px solid red;">2</view><view style="width:200rpx;border:1px solid red;">3</view><view style="width:200rpx;border:1px solid red;">4</view><view style="width:200rpx;border:1px solid red;">5</view></scroll-view></view>

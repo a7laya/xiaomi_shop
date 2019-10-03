@@ -1,0 +1,8 @@
+.thline{
+	padding: 0 10upx 0;
+	margin: 20upx 0;
+	line-height: 1upx;
+	border-left: 250upx solid #ddd;
+	border-right: 250upx solid #ddd;
+	text-align: center;
+}

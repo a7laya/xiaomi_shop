@@ -20,6 +20,8 @@
 	@import "/common/animate.css";
 	/* 自定义图标库 */
 	@import "/common/icon.css";
+	/* UI基础库 */
+	@import "/common/zcm-main.css";
 	/* 公共样式 */
 	@import "/common/common.css";
 </style>

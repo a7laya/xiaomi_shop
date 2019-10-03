@@ -1,9 +1,12 @@
 <template>
-	<view class="content">
-		<image v-show="show" class="logo animated bounceIn fast" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title" @tap="show = !show">{{title}}</text>
-		</view>
+	<view>
+		<scroll-view scroll-x="true" >
+			<view style='width:200upx; border: 1px solid red' >1</view>
+			<view style='width:200upx; border: 1px solid red' >2</view>
+			<view style='width:200upx; border: 1px solid red' >3</view>
+			<view style='width:200upx; border: 1px solid red' >4</view>
+			<view style='width:200upx; border: 1px solid red' >5</view>
+		</scroll-view>
 	</view>
 </template>
 
