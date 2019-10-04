@@ -5,17 +5,35 @@
 			"style": {
 				"navigationBarTitleText": "我们一起购物吧",
 				"app-plus": {
-					"scrollIndicator":"none", // 隐藏滚动条
-					"bounce":"none",
+					// "scrollIndicator":"none", // 隐藏滚动条
+					"bounce":"none", // 关闭反弹效果
 					"titleNView":{
+						// 搜索框配置
 						"searchInput":{
 							"align":"left",
 							"backgroundColor":"#f7f7f7",
 							"borderRadius":"4px",
-							"placeholder":"智能积木  越野四驱",
+							"placeholder":"智能积木 越野四驱",
 							"placeholderColor":"#cccccc",
 							"disabled":false
-						}
+						},
+						"buttons":[
+							{
+								"color":"#989898",
+								"colorPressed":"#fd6801",
+								"float":"left",
+								"fontSize":"22px",
+								"fontSrc":"/static/font/iconfont.ttf",
+								"text":"\ue64b"
+							},{
+								"color":"#989898",
+								"colorPressed":"#fd6801",
+								"float":"right",
+								"fontSize":"22px",
+								"fontSrc":"/static/font/iconfont.ttf",
+								"text":"\ue623"
+							}
+						]
 					}
 				}
 			}
