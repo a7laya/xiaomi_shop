@@ -29,5 +29,13 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {
+    "divider": "/components/common/divider",
+    "card": "/components/common/card",
+    "common-list": "/components/common/commonList",
+    "swiper-image": "/components/index/swiper-image",
+    "index-nav": "/components/index/index-nav",
+    "three-adv": "/components/index/three-adv",
+    "uni-load-more": "/components/uni-load-more"
+  }
 }

@@ -854,7 +854,7 @@ radio-group label, checkbox-group label{
 	white-space: nowrap;
 	line-height: 75upx;
 	height: 75upx;
-	border-bottom: 1px solid #f4f4f4;
+	/* border-bottom: 1px solid #f4f4f4; */
 }
 
 .swiper-tab-list {
@@ -864,14 +864,10 @@ radio-group label, checkbox-group label{
 	text-align: center;
 	color: #555;
 	padding: 10upx 0;
-	border-bottom-width: 5upx;
-	border-bottom-style: solid;
-	border-color: #FFFFFF;
 }
 
 .uni-tab-bar .active {
 	color: #DE5F0E;
-	border-color: #DE5F0E;
 }
 
 .uni-tab-bar .swiper-box {

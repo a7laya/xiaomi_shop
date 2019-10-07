@@ -66,6 +66,7 @@ body{
 
 .row { box-sizing: border-box!important; display: flex!important; flex-direction: row; flex-wrap: wrap;}
 [class*='col-'],[class*='span-'],[class*='span24-'] { min-height: 1px;box-sizing: border-box!important;}
+
 /* 栅栏一 */
 .col-1{ width: 62.5upx; } 
 .col-2{ width: 125upx; } 
