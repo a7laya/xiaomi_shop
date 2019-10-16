@@ -102,11 +102,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/common/divider":1,"components/uni-load-more":1};
+/******/ 		var cssChunks = {"components/common/divider":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/common/card":"components/common/card","components/common/commonList":"components/common/commonList","components/common/divider":"components/common/divider","components/common/price":"components/common/price","components/index/index-nav":"components/index/index-nav","components/index/swiper-image":"components/index/swiper-image","components/index/three-adv":"components/index/three-adv","components/uni-load-more":"components/uni-load-more"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/common/card":"components/common/card","components/common/commonList":"components/common/commonList","components/common/divider":"components/common/divider","components/common/price":"components/common/price","components/index/index-nav":"components/index/index-nav","components/index/swiper-image":"components/index/swiper-image","components/index/three-adv":"components/index/three-adv"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

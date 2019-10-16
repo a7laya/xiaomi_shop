@@ -9,7 +9,7 @@
 				</swiper-item>
 			</block>
 		</swiper>
-	</view>
+	</view> 
 </template>
 	
 <script>
