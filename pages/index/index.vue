@@ -12,27 +12,40 @@
 		
 		<!--scrollview要加上height才能滚动 并且要和swiper的height保持一致 -->
 		<swiper :current="tabIndex" :style="'height: ' + windowHeight + 'px;'">
-			<swiper-item v-for="(item, index) in tabBars" :key="index">
+			<swiper-item v-for="(item, index) in newsitems" :key="index">
 				<scroll-view scroll-y="true" :style="'height: ' + windowHeight + 'px;'">
-					<!-- 轮播图 -->
-					<swiper-image :resdata=""></swiper-image>
-					<!-- 首页分类 -->
-					<index-nav :resdata=""></index-nav>
-					<divider></divider>
+					<block v-for="(listItem, listIndex) in item.list" :key="listIndex">
+						<!-- 轮播图 -->
+						<template v-if="listItem.type === 'swiper'">
+							<swiper-image :resdata="listItem.data"></swiper-image>
+						</template>
+						
+						<!-- 首页分类 -->
+						<template v-if="listItem.type === 'indexNavs'">
+							<index-nav :resdata="listItem.data"></index-nav>
+							<divider></divider>
+						</template>
+						
+						<!-- 公共列表组件 -->
+						<template v-if="listItem.type === 'commonList'">
+							<view class="row j-sb">
+								<block v-for="(item2,index2) in listItem.data" :key="index2">
+									<commonList :item="item2" :index="index2"></commonList>
+								</block>
+							</view>
+						</template>
+					</block>
+					
+					
 					
 					<!-- 三图广告 -->
-					<three-adv :resdata=""></three-adv>
-					<divider></divider>
+					<!-- <three-adv :resdata=""></three-adv>
+					<divider></divider> -->
 					
 					<!-- 大图广告 -->
-					<card :headTitle="" :bodyCover=""></card>
+					<!-- <card :headTitle="" :bodyCover=""></card> -->
 					
-					<!-- 公共列表组件 -->
-					<view class="row j-sb">
-						<block v-for="(item2,index2) in commonList" :key="index2">
-							<commonList :item="item2" :index="index2"></commonList>
-						</block>
-					</view>
+					
 				</scroll-view>
 			</swiper-item>
 		</swiper>
@@ -53,7 +66,7 @@
 		data() {
 			return {
 				windowHeight: 0,
-				tabIndex: 1,
+				tabIndex: 0,
 				tabBars: [
 					{
 						name: '关注',
