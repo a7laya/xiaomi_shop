@@ -3,7 +3,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "我们一起购物吧",
+				"navigationBarTitleText": "uniapp测试",
 				"app-plus": {
 					// "scrollIndicator":"none", // 隐藏滚动条
 					"bounce": "none", // 关闭反弹效果
@@ -45,7 +45,11 @@
 			"path": "pages/my/my",
 			"style": {}
 		}
-	],
+	    ,{
+            "path" : "pages/ceshi/ceshi",
+            "style" : {}
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "我们一起购物吧",

@@ -1,5 +1,15 @@
 <script>
 	export default {
+		// 监听nvue页面uni.postMessage({...})发送过来的数据
+		onUniNViewMessage(e) {
+			console.log('来自nvue的数据',e);
+			// 处理
+			let data = e.data
+			if(data.from && data.from === 'index') {
+				// 通知vue页(分类页)修改数据,vue页面通过uni.$on('index',e=>{console.log(e)})监听接收
+				uni.$emit('index', data)
+			}
+		},
 		onLaunch: function() {
 			console.log('App Launch')
 		},

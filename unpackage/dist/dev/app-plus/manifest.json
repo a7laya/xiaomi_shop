@@ -34,16 +34,13 @@
       "delay": 0
     },
     "popGesture": "close",
-    "launchwebview": {
-      "render": "always"
-    },
+    "launchwebview": {},
     "statusbar": {
       "immersed": "supportedDevice",
       "style": "dark",
       "background": "#FFFFFF"
     },
     "usingComponents": true,
-    "nvueCompiler": "uni-app",
     "distribute": {
       "google": {
         "permissions": [
@@ -88,21 +85,10 @@
       }
     },
     "uni-app": {
-      "compilerVersion": "2.2.2",
+      "compilerVersion": "2.3.3",
       "control": "v8",
-      "nvueCompiler": "uni-app",
-      "renderer": "auto",
-      "nvue": {
-        "flex-direction": "column"
-      }
-    },
-    "secondwebview": {
-      "id": "1",
-      "launch_path": "__uniappview.html",
-      "kernel": "WKWebview",
-      "mode": "child",
-      "top": 0,
-      "bottom": 56
+      "nvueCompiler": "weex",
+      "renderer": "auto"
     }
   }
 }

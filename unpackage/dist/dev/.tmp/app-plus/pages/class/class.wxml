@@ -1,1 +1,1 @@
-<view></view>
+<view><text>{{text}}</text></view>

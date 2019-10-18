@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/class/class",
     "pages/cart/cart",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/ceshi/ceshi"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -43,18 +43,57 @@
       }
     ]
   },
-  "nvueCompiler": "uni-app",
+  "nvue": {
+    "pages": {
+      "pages/index/index.html": {
+        "window": {
+          "usingComponents": {},
+          "navigationBarTitleText": "uniapp测试",
+          "bounce": "none",
+          "titleNView": {
+            "searchInput": {
+              "align": "left",
+              "backgroundColor": "#f7f7f7",
+              "borderRadius": "4px",
+              "placeholder": "智能积木 越野四驱",
+              "placeholderColor": "#cccccc",
+              "disabled": false
+            },
+            "buttons": [
+              {
+                "color": "#989898",
+                "colorPressed": "#fd6801",
+                "float": "left",
+                "fontSize": "22px",
+                "fontSrc": "/static/font/iconfont.ttf",
+                "text": ""
+              },
+              {
+                "color": "#989898",
+                "colorPressed": "#fd6801",
+                "float": "right",
+                "fontSize": "22px",
+                "fontSrc": "/static/font/iconfont.ttf",
+                "text": ""
+              }
+            ]
+          }
+        },
+        "nvue": true
+      }
+    },
+    "entryPagePath": "pages/index/index"
+  },
+  "nvueCompiler": "weex",
   "renderer": "auto",
   "splashscreen": {
     "alwaysShowBeforeRender": true,
     "autoclose": false
   },
   "appname": "仿小米商城2",
-  "compilerVersion": "2.2.2",
+  "compilerVersion": "2.3.3",
   "usingComponents": {
     "divider": "/components/common/divider",
-    "card": "/components/common/card",
-    "price": "/components/common/price",
-    "common-list": "/components/common/commonList"
+    "price": "/components/common/price"
   }
 }

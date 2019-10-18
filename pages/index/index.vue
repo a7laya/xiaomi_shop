@@ -3,7 +3,8 @@
 		<!-- 顶部选项卡 -->
 		<scroll-view scroll-x class='scroll-row border-bottom px-2' style="height: 80rpx;"
 		:scroll-into-view="scrollinto" 
-		scroll-with-animation="true">
+		scroll-with-animation="true"
+		>
 			<view class="scroll-row-item px-2" 
 			style="width: 80rpx; line-height: 80rpx;"
 			v-for="(item,index) in tabBars" :key='index'
