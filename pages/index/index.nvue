@@ -5,7 +5,7 @@
 				<text style="text-align: center; margin: 10px; line-height: 88px;">{{refreshText}}</text>
 			</refresh>
 			<header>
-				<div style="background-color: #007AFF; height: 80px;">
+				<div style="background-color: #007AFF; height: 80px;" @click="ceshi">
 					<text style="font-size: 44; text-align: center;">{{ceshiText}}</text>
 				</div>
 			</header>
@@ -85,11 +85,30 @@
 		}
 		// created 相当于 onLoad
 		,created() {
-			// 创建一个监听对象globalEvent 并通过addEventListener方法的回调函数 监听vue页面发送过来的data
-			const globalEvent = weex.requireModule('globalEvent');
-			globalEvent.addEventListener('plusMessage', e => {
+			// 监听导航栏点击事件
+			uni.onNavigationBarButtonTap((e) => {
+				if(e.index === 1) return console.log('点击了右边')
+				console.log('点击了左边');
+			})
+			// 监听导航栏搜索框点击事件
+			uni.onNavigationBarSearchInputClicked(e=>{
+				console.log('点击了导航栏搜索框');
+			})
+			// 修改全局变量
+			getApp().globalData.text = '哈哈哈'
+			
+			// 创建一个监听对象html5plus 并通过addEventListener方法的回调函数 监听vue页面发送过来的data
+			const html5plus = weex.requireModule('globalEvent');
+			html5plus.addEventListener('plusMessage', e => {
 				this.ceshiText = e.data.res
 			})
+			
+			// nvue和vue之间的共享数据:通过uni.setstorage({key:...,data:...})
+			uni.setStorage({
+				key:'index',
+				data:'indexData'
+			})
+			
 		}
 	}
 </script>

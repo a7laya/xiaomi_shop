@@ -1290,9 +1290,9 @@ style.childNodes[0].nodeValue = css;
 }
 return rewritor;
 }
-setCssToHead([])();setCssToHead([[2,0]],"Some selectors are not allowed in component wxss, including tag name selectors, ID selectors, and attribute selectors.(./app.wxss:5004:1)",{path:"./app.wxss"})();
+setCssToHead([])();setCssToHead([[2,0]],"Some selectors are not allowed in component wxss, including tag name selectors, ID selectors, and attribute selectors.(./app.wxss:5008:1)",{path:"./app.wxss"})();
 
-__wxAppCode__['app.wxss']=setCssToHead([[2,0]],"Some selectors are not allowed in component wxss, including tag name selectors, ID selectors, and attribute selectors.(./app.wxss:5004:1)",{path:"./app.wxss"});    
+__wxAppCode__['app.wxss']=setCssToHead([[2,0]],"Some selectors are not allowed in component wxss, including tag name selectors, ID selectors, and attribute selectors.(./app.wxss:5008:1)",{path:"./app.wxss"});    
 __wxAppCode__['app.wxml']=$gwx('./app.wxml');
 
 __wxAppCode__['components/common/divider.wxss']=setCssToHead([".",[1],"divider { height: ",[0,18],"; background: #f5f5f5; }\n",],undefined,{path:"./components/common/divider.wxss"});    

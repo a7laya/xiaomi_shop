@@ -1,5 +1,9 @@
 <script>
 	export default {
+		// 全局变量
+		globalData:{
+			text:'the global data'
+		},
 		// 监听nvue页面uni.postMessage({...})发送过来的数据
 		onUniNViewMessage(e) {
 			console.log('来自nvue的数据',e);

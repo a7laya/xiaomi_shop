@@ -15,7 +15,7 @@
 							"borderRadius": "4px",
 							"placeholder": "智能积木 越野四驱",
 							"placeholderColor": "#cccccc",
-							"disabled": false
+							"disabled": true
 						},
 						"buttons": [{
 							"color": "#989898",
