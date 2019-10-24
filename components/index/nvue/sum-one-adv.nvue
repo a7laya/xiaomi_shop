@@ -1,0 +1,26 @@
+<template>
+	<div>
+		<!-- 大图广告 -->
+		<div class="w-100">
+			<div class="p-2 border-bottom">
+				<text class="text-dark font-md font-weight">{{resData.title}}</text>
+			</div>
+			<div>
+				<image :src="resData.cover" class="w-100" style="height: 300px;"></image>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		props:{
+			resData: Object
+		}
+	}
+</script>
+
+<style src='@/common/zcm-main-nvue.css'></style>
+<style>
+
+</style>

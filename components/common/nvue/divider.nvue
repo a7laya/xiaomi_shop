@@ -1,0 +1,16 @@
+<template>
+	<div>
+		<!-- 封装全局分割线组件 -->
+		<div class="w-100" style="height: 18px; background-color: #F5F5F5;"></div>
+	</div>
+</template>
+
+<script>
+	export default {
+		
+	}
+</script>
+<style src="@/common/zcm-main-nvue.css"></style>
+<style>
+
+</style>

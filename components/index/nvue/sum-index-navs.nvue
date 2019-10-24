@@ -1,0 +1,30 @@
+<template>
+	<!-- 图标分类组件
+	*
+	* 750px => (css: w-100) 不写这个的话在IOS里面会有问题
+	* 左右边距: 20px  * 2  = 40px => (css: px-2)
+	* 每个图标div: 142px * 5 = 710px
+	* 图标大小: 58px * 58px
+	* 文字大小: 25px => (css: font) 
+	*
+	-->
+	<div class="row w-100 px-2 mb-3">
+		<div class="j-center a-center mt-3" style="width: 142px;" v-for="(item,index) in indexNavs" :key="index">
+			<image :src="item.src" style="width: 58px; height: 58px;"></image>
+			<text class="font mt-1">{{item.name}}</text>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		props:{
+			indexNavs:Array
+		}
+	}
+</script>
+
+<style src="@/common/zcm-main-nvue.css"></style>
+<style>
+
+</style>

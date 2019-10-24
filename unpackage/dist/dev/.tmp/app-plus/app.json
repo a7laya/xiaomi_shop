@@ -91,7 +91,7 @@
     "autoclose": false
   },
   "appname": "仿小米商城2",
-  "compilerVersion": "2.3.5",
+  "compilerVersion": "2.3.6",
   "usingComponents": {
     "divider": "/components/common/divider",
     "price": "/components/common/price"

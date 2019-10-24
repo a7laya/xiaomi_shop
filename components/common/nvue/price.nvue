@@ -1,0 +1,19 @@
+<template>
+	<div>
+		<!-- 价格组件 -->
+		<div class="flex-row">
+			<text style="color: #fd6801;">￥</text>
+			<text style="color: #fd6801;" class="font-lg"><slot></slot></text>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		
+	}
+</script>
+<style src="@/common/zcm-main-nvue.css"></style>
+<style>
+
+</style>

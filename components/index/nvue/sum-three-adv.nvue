@@ -1,0 +1,31 @@
+<template>
+	<div>
+		<!-- 三图广告
+		* 左图: w: 375 - 2 = 373  h: 560
+		* 右图: w: 375            h: 560/2 -1 = 279
+		*  
+		-->
+		<div class="w-100 row">
+			<div class="col-6">
+				<image :src="resData[0].src" style="height: 560px; width: 373px;"></image>
+			</div>
+			<div class="col-6 j-sb">
+				<image :src="resData[1].src" style="height: 279px; width: 375px;"></image>
+				<image :src="resData[2].src" style="height: 279px; width: 375px;"></image>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		props:{
+			resData: Array
+		}
+	}
+</script>
+
+<style src='@/common/zcm-main-nvue.css'></style>
+<style>
+
+</style>

@@ -89,7 +89,7 @@
       }
     },
     "uni-app": {
-      "compilerVersion": "2.3.5",
+      "compilerVersion": "2.3.6",
       "control": "v8",
       "nvueCompiler": "weex",
       "renderer": "auto"
@@ -97,7 +97,7 @@
     "tabBar": {
       "color": "#B1B1B1",
       "selectedColor": "#FD6801",
-      "borderStyle": "#c6c6c6",
+      "borderStyle": "rgba(0,0,0,0.4)",
       "backgroundColor": "white",
       "list": [
         {
