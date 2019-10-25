@@ -1,27 +1,12 @@
 <template>
 	<div>
-		<list show-scrollbar="false">
-			<cell>
-				<!-- 轮播图组件 -->
-				<sum-slider :swipers="swipers"></sum-slider>
-				
-				<!-- 首页小图标导航组件 -->
-				<sum-index-navs :indexNavs='indexNavs'></sum-index-navs>
-				<divider></divider>
-				
-				<!-- 三图广告 -->
-				<sum-three-adv :resData='threeAdv'></sum-three-adv>
-				<divider></divider>
-				
-				<!-- 大图广告 -->
-				<sum-one-adv :resData="oneAdv"></sum-one-adv>
-				<divider></divider>
-				
-				<!-- 公共列表组件 -->
-				<common-list :resData="commonList"></common-list>
-				
-			</cell>
-		</list>
+		<!-- 选项卡组件 --> 
+		<sum-tabbar :tabBars="tabBars" :tabIndex="tabIndex" @changetab="changeTab"></sum-tabbar>
+		<slider class="" style="flex: 1;" @change="changeSlider" :index="tabIndex">
+			<div class="j-end a-center" v-for="(item,index) in tabBars" :key="index">
+				<text class="font-big">{{item.name}}</text>
+			</div>
+		</slider>
 	</div>
 </template>
 
@@ -33,49 +18,132 @@
 	import sumOneAdv    from "@/components/index/nvue/sum-one-adv"
 	import price        from "@/components/common/nvue/price"
 	import commonList   from "@/components/common/nvue/common-list"
+	import sumTabbar    from "@/components/index/nvue/sum-tabbar"
+
 	
 	// 监听当前窗口显示, 相当于uniapp中 show 的生命周期
 	const currentWebview = plus.webview.currentWebview();
+	// 模拟后端数据
+	let demoTabBar = [
+			{
+			name: '关注',
+			id: 'guanzhu',
+			template: 'index'
+		}, {
+			name: '推荐',
+			id: 'tuijian',
+			template: 'special'
+		}, {
+			name: '体育',
+			id: 'tiyu',
+			template: 'special'
+		}, {
+			name: '热点',
+			id: 'redian',
+			template: 'special'
+		}, {
+			name: '财经',
+			id: 'caijing',
+			template: 'special'
+		}, {
+			name: '娱乐',
+			id: 'yule',
+			template: 'special'
+		}, {
+			name: '军事',
+			id: 'junshi',
+			template: 'special'
+		}, {
+			name: '历史',
+			id: 'lishi',
+			template: 'special'
+		}, {
+			name: '本地',
+			id: 'bendi',
+			template: 'special'
+		},
+	]
 	export default {
-		components:{
+		components: {
 			sumSlider,
 			sumIndexNavs,
 			divider,
 			sumThreeAdv,
 			sumOneAdv,
 			price,
-			commonList
+			commonList,
+			sumTabbar
 		},
-		data () {
+		data() {
 			return {
-				swipers:[
-					{src:"/static/images/demo/demo4.jpg"},
-					{src:"/static/images/demo/demo5.jpg"},
-					{src:"/static/images/demo/demo6.jpg"}
+				tabIndex: 0,
+				tabBars: demoTabBar,
+				swipers: [{
+						src: "/static/images/demo/demo4.jpg"
+					},
+					{
+						src: "/static/images/demo/demo5.jpg"
+					},
+					{
+						src: "/static/images/demo/demo6.jpg"
+					}
 				],
-				indexNavs:[
-					{ src:"/static/images/indexnav/1.png", name:"新品发布" },
-					{ src:"/static/images/indexnav/2.gif", name:"小米众筹" },
-					{ src:"/static/images/indexnav/3.gif", name:"以旧换新" },
-					{ src:"/static/images/indexnav/4.gif", name:"一分换团" },
-					{ src:"/static/images/indexnav/5.gif", name:"超值特卖" },
-					{ src:"/static/images/indexnav/6.gif", name:"小米秒杀" },
-					{ src:"/static/images/indexnav/7.gif", name:"真心想要" },
-					{ src:"/static/images/indexnav/8.gif", name:"电视热卖" },
-					{ src:"/static/images/indexnav/9.gif", name:"家电热卖" },
-					{ src:"/static/images/indexnav/10.gif", name:"米粉卡1" }
+				indexNavs: [{
+						src: "/static/images/indexnav/1.png",
+						name: "新品发布"
+					},
+					{
+						src: "/static/images/indexnav/2.gif",
+						name: "小米众筹"
+					},
+					{
+						src: "/static/images/indexnav/3.gif",
+						name: "以旧换新"
+					},
+					{
+						src: "/static/images/indexnav/4.gif",
+						name: "一分换团"
+					},
+					{
+						src: "/static/images/indexnav/5.gif",
+						name: "超值特卖"
+					},
+					{
+						src: "/static/images/indexnav/6.gif",
+						name: "小米秒杀"
+					},
+					{
+						src: "/static/images/indexnav/7.gif",
+						name: "真心想要"
+					},
+					{
+						src: "/static/images/indexnav/8.gif",
+						name: "电视热卖"
+					},
+					{
+						src: "/static/images/indexnav/9.gif",
+						name: "家电热卖"
+					},
+					{
+						src: "/static/images/indexnav/10.gif",
+						name: "米粉卡1"
+					}
 				],
-				threeAdv:[
-					{ src: "/static/images/demo/demo1.jpg" },
-					{ src: "/static/images/demo/demo2.jpg" },
-					{ src: "/static/images/demo/demo3.jpg" }
+				threeAdv: [{
+						src: "/static/images/demo/demo1.jpg"
+					},
+					{
+						src: "/static/images/demo/demo2.jpg"
+					},
+					{
+						src: "/static/images/demo/demo3.jpg"
+					}
 				],
-				oneAdv:{
+				oneAdv: {
 					title: "每日精选2",
 					cover: "/static/images/demo/demo4.jpg"
 				},
-				commonList: [
-					{
+				commonList: [{
 						cover: "/static/images/demo/list/1.jpg",
 						title: "米家空调",
 						desc: "1.5匹直流变频",
@@ -121,10 +189,10 @@
 			}
 		},
 		// created 相当于 onLoad
-		created () {
+		created() {
 			// 监听当前窗口显示, 相当于uniapp中 show 的生命周期
 			currentWebview.addEventListener('show', e => {
-				console.log('首页显示',currentWebview.getURL());
+				console.log('首页显示', currentWebview.getURL());
 			})
 		},
 		beforeDestroy() {
@@ -132,12 +200,19 @@
 			currentWebview.removeEventListener('show', e => {});
 		},
 		methods: {
-			
+			changeTab(index) {
+				this.tabIndex = index
+				
+			},
+			changeSlider(e) {
+				this.changeTab(e.index)
+				// this.tabIndex = e.index
+			}
 		}
 	}
 </script>
 
 <style src="@/common/zcm-main-nvue.css"></style>
 <style>
-	
+
 </style>

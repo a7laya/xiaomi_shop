@@ -1,0 +1,55 @@
+<template>
+	<div>
+		<scroller class="w-100 flex-row px-1" style="height: 75px;" scroll-direction="horizontal" show-scrollbar="false">
+			<div class="a-center j-center" style="width: 120px; height: 75px;" v-for="(item,index) in tabBars" :key="index"
+			 @click="change(index)" :ref="`tab${index}`">
+				<text class="font-md font-weight" style="border-bottom-width: 5px; height: 75px; line-height: 75px;" :style="{'color': tabIndex == index ? '#FD6801' : '#555'
+				, 'border-color': tabIndex == index ? '#FD6801' : '#fff'}">{{item.name}}</text>
+			</div>
+		</scroller>
+	</div>
+</template>
+
+<script>
+	// 引入dom
+	const dom = weex.requireModule('dom')
+	export default {
+		props:{
+			tabBars:{
+				type: Array,
+				default: []
+			},
+			tabIndex:{
+				type: Number,
+				default: 0
+			}
+		},
+		watch: {
+			// 监听tabIndex的变化
+			tabIndex(newValue, oldValue) {
+				this.change(newValue)
+			}
+		}, 
+		methods:{
+			// 点击选项卡事件
+			async change(index) {
+				// 子父通信
+				this.$emit('tabchange',index)
+				// 获取当前节点
+				let el = this.$refs[`tab${index}`][0]
+				dom.getComponentRect(el, e => {
+					console.log(e);
+					if (e.size.right > 730) {
+						dom.scrollToElement(this.$refs[`tab${index-4}`][0], {offset:0})
+					} else if (e.size.left < 0) {
+						dom.scrollToElement(el, {offset:-10})
+					}
+				})
+			}
+		}
+	}
+</script>
+<style src="@/common/zcm-main-nvue.css"></style>
+<style>
+
+</style>
