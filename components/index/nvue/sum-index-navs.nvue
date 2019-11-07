@@ -11,7 +11,7 @@
 	<div class="row w-100 px-2 mb-3">
 		<div class="j-center a-center mt-3" style="width: 142px;" v-for="(item,index) in indexNavs" :key="index">
 			<image :src="item.src" style="width: 58px; height: 58px;"></image>
-			<text class="font mt-1">{{item.name}}</text>
+			<text class="font mt-1">{{item.text}}</text>
 		</div>
 	</div>
 </template>

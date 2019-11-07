@@ -3,7 +3,8 @@
     "pages/class/class",
     "pages/cart/cart",
     "pages/my/my",
-    "pages/ceshi/ceshi"
+    "pages/search/search",
+    "pages/search-list/search-list"
   ],
   "window": {
     "navigationBarTextStyle": "black",

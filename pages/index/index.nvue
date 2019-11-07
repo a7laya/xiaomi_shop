@@ -2,42 +2,70 @@
 	<div>
 		<!-- 选项卡组件 --> 
 		<sum-tabbar :tabBars="tabBars" :tabIndex="tabIndex" @changetab="changeTab"></sum-tabbar>
-		<slider class="flex-1" @change="changeSlider" :index="tabIndex" infinite="false">
-			<list show-scrollbar="false" v-for="(item, index) in tabBars" :key="index">
+		<slider class="flex-1 w-100" @change="changeSlider" :index="tabIndex" infinite="false">
+			<list show-scrollbar="false" v-for="(list, listIndex) in newsItems" :key="listIndex">
 				
 				<!-- 下拉刷新 -->
 				<refresh @refresh="refresh"  @pullingdown="pullingdown"
 				class="w-100 flex-row j-center a-center" 
 				style="height: 88px;"
-				:display="refreshShow">
-					<text class="font-md text-light-muted">{{refreshText}}</text>
+				:display="list.refreshShow">
+					<text class="font-md text-light-muted">{{list.refreshText}}</text>
 				</refresh>
 				
-				<cell>
-					<!-- 轮播图组件 -->
-					<sum-slider :swipers="swipers"></sum-slider>
-					
-					<!-- 首页小图标导航组件 -->
-					<sum-index-navs :indexNavs='indexNavs'></sum-index-navs>
-					<divider></divider>
-					
-					<!-- 三图广告 -->
-					<sum-three-adv :resData='threeAdvs'></sum-three-adv>
-					<divider></divider>
-					
-					<!-- 大图广告 -->
-					<sum-one-adv :resData="oneAdv"></sum-one-adv>
-					<divider></divider>
-					
-					<!-- 公共列表组件 -->
-					<common-list :resData="commonList"></common-list>
-					
-				</cell>
+				<!-- 首页模版 -->
+			<template v-if="tabBars[listIndex].template === 'index'">
+					<cell v-for="(listItem, itemIndex) in list.data" :key="itemIndex">
+						<!-- 轮播图组件 -->
+						<sum-slider v-if="listItem.type === 'swipers'" :swipers="listItem.data"></sum-slider>
+						
+						<!-- 首页小图标导航组件 -->
+						<template v-if="listItem.type === 'indexNavs'">
+							<sum-index-navs :indexNavs='listItem.data'></sum-index-navs>
+							<divider></divider>
+						</template>
+						
+						<!-- 三图广告 -->
+						<template v-if="listItem.type === 'threeAdvs'">
+							<sum-three-adv :resData='listItem.data'></sum-three-adv>
+							<divider></divider>
+						</template>
+						
+						<!-- 大图广告 -->
+						<template v-if="listItem.type === 'oneAdv'">
+							<sum-one-adv :resData="listItem.data"></sum-one-adv>
+							<divider></divider>
+						</template>
+						
+						<!-- 公共列表组件 -->
+						<common-list v-if="listItem.type === 'commonList'" :resData="listItem.data"></common-list>
+						
+					</cell>
+				</template>
+				
+				<!-- 专题页模版 -->
+				<template v-else-if="tabBars[listIndex].template == 'special'">
+						<cell v-for="(listItem, itemIndex) in list.data" :key="itemIndex">
+							<!-- 轮播图组件 -->
+							<sum-slider v-if="listItem.type === 'swipers'" :swipers="listItem.data"></sum-slider>
+							
+							<!-- 首页小图标导航组件 -->
+							<template v-if="listItem.type === 'indexNavs'">
+								<sum-index-navs :indexNavs='listItem.data'></sum-index-navs>
+							</template>
+							
+							<!-- 公共列表组件 -->
+							<common-list v-if="listItem.type === 'commonList'" :resData="listItem.data"></common-list>
+							
+						</cell>
+				</template>
+				
+				
 				<!-- 上拉加载 -->
-				<loading @loading="onLoading" :display="loadingShow"
+				<loading @loading="onLoading" :display="list.loadingShow"
 				class="w-100 flex-row a-center j-center"
 				style="height: 70px;">
-					<text class="font-md text-light-muted">{{loadingText}}</text>
+					<text class="font-md text-light-muted">{{list.loadingText}}</text>
 				</loading>
 			</list>
 		</slider>
@@ -113,115 +141,7 @@
 				newsItems: [],
 				tabIndex: 0,
 				tabBars: demoTabBar,
-				swipers: [{
-						src: "/static/images/demo/demo4.jpg"
-					},
-					{
-						src: "/static/images/demo/demo5.jpg"
-					},
-					{
-						src: "/static/images/demo/demo6.jpg"
-					}
-				],
-				indexNavs: [{
-						src: "/static/images/indexnav/1.png",
-						name: "新品发布"
-					},
-					{
-						src: "/static/images/indexnav/2.gif",
-						name: "小米众筹"
-					},
-					{
-						src: "/static/images/indexnav/3.gif",
-						name: "以旧换新"
-					},
-					{
-						src: "/static/images/indexnav/4.gif",
-						name: "一分换团"
-					},
-					{
-						src: "/static/images/indexnav/5.gif",
-						name: "超值特卖"
-					},
-					{
-						src: "/static/images/indexnav/6.gif",
-						name: "小米秒杀"
-					},
-					{
-						src: "/static/images/indexnav/7.gif",
-						name: "真心想要"
-					},
-					{
-						src: "/static/images/indexnav/8.gif",
-						name: "电视热卖"
-					},
-					{
-						src: "/static/images/indexnav/9.gif",
-						name: "家电热卖"
-					},
-					{
-						src: "/static/images/indexnav/10.gif",
-						name: "米粉卡1"
-					}
-				],
-				threeAdvs: [{
-						src: "/static/images/demo/demo1.jpg"
-					},
-					{
-						src: "/static/images/demo/demo2.jpg"
-					},
-					{
-						src: "/static/images/demo/demo3.jpg"
-					}
-				],
-				oneAdv: {
-					title: "每日精选2",
-					cover: "/static/images/demo/demo4.jpg"
-				},
-				commonList: [{
-						cover: "/static/images/demo/list/1.jpg",
-						title: "米家空调",
-						desc: "1.5匹直流变频",
-						price: 1399,
-						orginPrice: 2699
-					},
-					{
-						cover: "/static/images/demo/list/2.jpg",
-						title: "米家空调",
-						desc: "1.5匹直流变频",
-						price: 1399,
-						orginPrice: 2699
-					},
-					{
-						cover: "/static/images/demo/list/3.jpg",
-						title: "米家空调",
-						desc: "1.5匹直流变频",
-						price: 1399,
-						orginPrice: 2699
-					},
-					{
-						cover: "/static/images/demo/list/4.jpg",
-						title: "米家空调",
-						desc: "1.5匹直流变频",
-						price: 1399,
-						orginPrice: 2699
-					},
-					{
-						cover: "/static/images/demo/list/5.jpg",
-						title: "米家空调",
-						desc: "1.5匹直流变频",
-						price: 1399,
-						orginPrice: 2699
-					},
-					{
-						cover: "/static/images/demo/list/6.jpg",
-						title: "米家空调",
-						desc: "1.5匹直流变频",
-						price: 1399,
-						orginPrice: 2699
-					}
-				]
-			}
+				}
 		},
 		// created 相当于 onLoad
 		created() {
@@ -230,12 +150,132 @@
 				console.log('首页显示', currentWebview.getURL());
 			})
 			this.newsItems = this.randomfn()
+			
+			// 监听搜索框点击事件
+			uni.onNavigationBarSearchInputClicked(()=>{
+				uni.navigateTo({
+					url:'../search/search'
+				})
+			})
+			// 监听导航栏按钮点击事件
+			uni.onNavigationBarButtonTap(e=>{
+				// 点击了左边的按钮
+				if(e.index === 0) uni.navigateTo({
+					url: '../search-list/search-list'
+				})
+			})
 		},
 		beforeDestroy() {
-			// 移除监听事件
+			// 移除窗口显示监听事件
 			currentWebview.removeEventListener('show', e => {});
 		},
 		methods: {
+			// 模拟加载更多
+			addData(index){
+				if (this.newsItems[index].data.length > 20) {
+					this.newsItems[index].loadingText = '没有更多了'
+					return
+				}
+				let arr = [
+					{
+						type: "swipers",
+						data: [
+							{ src: "/static/images/demo/demo4.jpg" },
+							{ src: "/static/images/demo/demo5.jpg" },
+							{ src: "/static/images/demo/demo6.jpg" }
+						]
+					},
+					{
+						type: "indexNavs",
+						data: [
+							{ src:"/static/images/indexnav/1.png",text:"新品发布" },
+							{ src:"/static/images/indexnav/2.gif",text:"小米众筹" },
+							{ src:"/static/images/indexnav/3.gif",text:"以旧换新" },
+							{ src:"/static/images/indexnav/4.gif",text:"一分换团" },
+							{ src:"/static/images/indexnav/5.gif",text:"超值特卖" },
+							{ src:"/static/images/indexnav/6.gif",text:"小米秒杀" },
+							{ src:"/static/images/indexnav/7.gif",text:"真心想要" },
+							{ src:"/static/images/indexnav/8.gif",text:"电视热卖" },
+							{ src:"/static/images/indexnav/9.gif",text:"家电热卖" },
+							{ src:"/static/images/indexnav/10.gif",text:"米粉卡" }
+						]
+					},
+					{
+						type: "threeAdvs",
+						data: [
+							{ src: "/static/images/demo/demo1.jpg" },
+							{ src: "/static/images/demo/demo2.jpg" },
+							{ src: "/static/images/demo/demo3.jpg" }
+						]
+					},
+					{
+						type: "oneAdv",
+						data: {
+							title: "每日精选",
+							cover: "/static/images/demo/demo4.jpg"
+						}
+					},
+					{
+						type: "commonList",
+						data: [
+							{
+								cover: "/static/images/demo/list/1.jpg",
+								title: "米家空调",
+								desc: "1.5匹直流变频",
+								price: 1399,
+								orginPrice: 2699
+							},
+							{
+								cover: "/static/images/demo/list/2.jpg",
+								title: "米家空调",
+								desc: "1.5匹直流变频",
+								price: 1399,
+								orginPrice: 2699
+							},
+							{
+								cover: "/static/images/demo/list/3.jpg",
+								title: "米家空调",
+								desc: "1.5匹直流变频",
+								price: 1399,
+								orginPrice: 2699
+							},
+							{
+								cover: "/static/images/demo/list/4.jpg",
+								title: "米家空调",
+								desc: "1.5匹直流变频",
+								price: 1399,
+								orginPrice: 2699
+							},
+							{
+								cover: "/static/images/demo/list/5.jpg",
+								title: "米家空调",
+								desc: "1.5匹直流变频",
+								price: 1399,
+								orginPrice: 2699
+							},
+							{
+								cover: "/static/images/demo/list/6.jpg",
+								title: "米家空调",
+								desc: "1.5匹直流变频",
+								price: 1399,
+								orginPrice: 2699
+							}
+						]
+					}
+				]
+				this.newsItems[index].data = [...this.newsItems[index].data,...arr]			
+			},
+			// 上拉加载更多
+			onLoading(){
+				// 获取当前索引
+				let index = this.tabIndex
+				this.newsItems[index].loadingShow = 'show'
+				setTimeout(()=>{
+					this.addData(index)
+					this.newsItems[index].loadingShow = 'hide'
+					// this.lists = [...this.lists, 'a', 'b', 'c']
+				},1000)
+			},
 			changeTab(index) {
 				this.tabIndex = index
 			},
@@ -243,32 +283,31 @@
 				this.changeTab(e.index)
 				// this.tabIndex = e.index
 			},
-			// 上拉加载更多
-			onLoading(){
-				this.loadingShow = 'show'
-				setTimeout(()=>{
-					this.loadingShow = 'hide'
-					// this.lists = [...this.lists, 'a', 'b', 'c']
-				},1200)
-			},// 执行刷新
+			
+			
+			// 执行刷新
 			refresh (e) {
-				this.refreshShow = 'show'
-				this.refreshText = '正在刷新'
+				// 获取当前索引
+				let index = this.tabIndex
+				this.newsItems[index].refreshShow = 'show'
+				this.newsItems[index].refreshText = '正在刷新'
 				setTimeout(() => {
-					this.refreshShow = 'hide'
-					this.refreshText = '下拉可以刷新'
-				}, 2000);
+					this.newsItems[index].refreshShow = 'hide'
+					this.newsItems[index].refreshText = '下拉可以刷新'
+				}, 1000);
 			},
 			// 判断下拉刷新状态 - 下拉程度
 			pullingdown(e){
+				// 获取当前索引
+				let index = this.tabIndex
 				if(e.pullingDistance > e.viewHeight) {
-					this.refreshText = '释放就能刷新'
+					this.newsItems[index].refreshText = '释放就能刷新'
 				} else {
-					this.refreshText = '下拉可以刷新'
+					this.newsItems[index].refreshText = '下拉可以刷新'
 				}
 			},
 			// 生成随机数据
-				randomfn() {
+			randomfn() {
 					let ary = [];
 					let length = this.tabBars.length;
 					for (let i = 0; i < length; i++) {
@@ -307,11 +346,11 @@
 								},
 								{
 									type: "threeAdvs",
-									data: {
-										big:         { src: "/static/images/demo/demo1.jpg" },
-										smalltop:    { src: "/static/images/demo/demo2.jpg" },
-										smallbottom: { src: "/static/images/demo/demo3.jpg" }
-									}
+									data: [
+										{ src: "/static/images/demo/demo1.jpg" },
+										{ src: "/static/images/demo/demo2.jpg" },
+										{ src: "/static/images/demo/demo3.jpg" }
+									]
 								},
 								{
 									type: "oneAdv",
@@ -368,9 +407,78 @@
 									]
 								}
 							]
+						} else if (this.tabBars[i].template === 'special'){
+							aryItem.data = [
+								{
+									type: "swipers",
+									data: [
+										{ src: "/static/images/demo/demo4.jpg" },
+										{ src: "/static/images/demo/demo5.jpg" },
+										{ src: "/static/images/demo/demo6.jpg" }
+									]
+								},
+								{
+									type: "indexNavs",
+									data: [
+										{ src:"/static/images/indexnav/1.png",text:"新品发布" },
+										{ src:"/static/images/indexnav/2.gif",text:"小米众筹" },
+										{ src:"/static/images/indexnav/3.gif",text:"以旧换新" },
+										{ src:"/static/images/indexnav/4.gif",text:"一分换团" },
+										{ src:"/static/images/indexnav/10.gif",text:"米粉卡" }
+									]
+								},
+								{
+									type: "commonList",
+									data: [
+										{
+											cover: "/static/images/demo/list/1.jpg",
+											title: "米家空调",
+											desc: "1.5匹直流变频",
+											price: 1399,
+											orginPrice: 2699
+										},
+										{
+											cover: "/static/images/demo/list/2.jpg",
+											title: "米家空调",
+											desc: "1.5匹直流变频",
+											price: 1399,
+											orginPrice: 2699
+										},
+										{
+											cover: "/static/images/demo/list/3.jpg",
+											title: "米家空调",
+											desc: "1.5匹直流变频",
+											price: 1399,
+											orginPrice: 2699
+										},
+										{
+											cover: "/static/images/demo/list/4.jpg",
+											title: "米家空调",
+											desc: "1.5匹直流变频",
+											price: 1399,
+											orginPrice: 2699
+										},
+										{
+											cover: "/static/images/demo/list/5.jpg",
+											title: "米家空调",
+											desc: "1.5匹直流变频",
+											price: 1399,
+											orginPrice: 2699
+										},
+										{
+											cover: "/static/images/demo/list/6.jpg",
+											title: "米家空调",
+											desc: "1.5匹直流变频",
+											price: 1399,
+											orginPrice: 2699
+										}
+									]
+								}
+							]
 						}
 						ary.push(aryItem);
 					}
+					
 					return ary;
 				}
 			
