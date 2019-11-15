@@ -38,11 +38,10 @@
 				// 获取当前节点
 				let el = this.$refs[`tab${index}`][0]
 				dom.getComponentRect(el, e => {
-					console.log(e);
 					if (e.size.right > 730) {
 						dom.scrollToElement(this.$refs[`tab${index-4}`][0], {offset:0})
 					} else if (e.size.left < 0) {
-						dom.scrollToElement(el, {offset:-10})
+						dom.scrollToElement(el, {offset:-10}) 
 					}
 				})
 			}

@@ -1,3 +1,25 @@
 {
+  "navigationBarTitleText": "uniapp测试",
+  "bounce": "none",
+  "titleNView": {
+    "searchInput": {
+      "align": "left",
+      "backgroundColor": "#f7f7f7",
+      "borderRadius": "4px",
+      "placeholder": "智能积木 越野四驱",
+      "placeholderColor": "#cccccc",
+      "disabled": true
+    },
+    "buttons": [
+      {
+        "color": "#989898",
+        "colorPressed": "#fd6801",
+        "float": "right",
+        "fontSize": "22px",
+        "fontSrc": "/static/font/iconfont.ttf",
+        "text": ""
+      }
+    ]
+  },
   "usingComponents": {}
 }

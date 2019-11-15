@@ -46,6 +46,7 @@
       "background": "#FFFFFF"
     },
     "usingComponents": true,
+    "nvueCompiler": "weex",
     "distribute": {
       "google": {
         "permissions": [
@@ -90,7 +91,7 @@
       }
     },
     "uni-app": {
-      "compilerVersion": "2.3.7",
+      "compilerVersion": "2.4.1",
       "control": "v8",
       "nvueCompiler": "weex",
       "renderer": "auto"

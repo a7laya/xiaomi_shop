@@ -147,7 +147,6 @@
 		created() {
 			// 监听当前窗口显示, 相当于uniapp中 show 的生命周期
 			currentWebview.addEventListener('show', e => {
-				console.log('首页显示', currentWebview.getURL());
 			})
 			this.newsItems = this.randomfn()
 			
