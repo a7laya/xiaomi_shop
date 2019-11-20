@@ -1,16 +1,16 @@
 <template>
 	<view class="d-flex border-top border-light-secondary" style="height: 100%; box-sizing: border-box;">
-		<scroll-view scroll-y="true" style="flex: 1; width: 100%;"
+		<scroll-view scroll-y="true" style="flex: 1; height: 100%;"
 		class="border-right border-light-secondary">
 			<view class="border-bottom border-light-secondary py-1 left-scroll-item" hover-class="bg-light-secondary" v-for="(item,index) in cate" :key='index'
-			@click="changeCate(index)">
-				<view class="text-center py-1 font-md text-muted"
+			@tap="changeCate(index)">
+				<view class="py-1 font-md text-muted text-center"
 				:class="cateIndex == index ? 'class-active' : ''">
 					{{item.name}}
 				</view>
 			</view>
 		</scroll-view>
-		<scroll-view scroll-y="true" style="flex: 3.5; width: 100%;" 
+		<scroll-view scroll-y="true" style="flex: 3.5; height: 100%;" 
 		:scroll-top="rightScorllTop"
 		scroll-with-animation="true">
 			<view class="row right-scroll-item" v-for="(listItem,listIndex) in content" :key="listIndex"
@@ -56,12 +56,14 @@
 			}).exec();
 		},
 		methods: {
+			// 获取模拟数据
 			getData(){
 				for (let i=0; i<20; i++) {
 					this.cate.push({name:'分类'+i})
 					this.content.push(
 						{
 							list:[
+								{cover:'/static/images/demo/cate_03.png',name:'商品'+i},
 								{cover:'/static/images/demo/cate_03.png',name:'商品'+i},
 								{cover:'/static/images/demo/cate_03.png',name:'商品'+i},
 								{cover:'/static/images/demo/cate_03.png',name:'商品'+i},
