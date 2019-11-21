@@ -4,12 +4,12 @@ import App from './App'
 Vue.config.productionTip = false
 
 // 引入全局组件
-
+// 引入分割线组件
 import divider from "@/components/common/divider.vue"
-import price   from "@/components/common/price.vue"
-
 Vue.component('divider', divider)
-Vue.component('price', price)
+// 引入全局加动画组件
+import loading from "@/components/common/loading.vue"
+Vue.component('loading', loading)
 
 App.mpType = 'app'
 
