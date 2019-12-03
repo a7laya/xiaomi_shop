@@ -2,7 +2,7 @@
 	<div>
 		<div class="w-100 row j-sb">
 			<div class="pb-1 mb-1" style="width: 372px; height: 540px;" 
-			v-for="(item,index) in resData" :key="index">
+			v-for="(item,index) in resData" :key="index" @click="openDetail">
 				<!-- 图片 -->
 				<image :src="item.cover" style="width: 372;height: 372;"></image>
 				<!-- 信息 -->
@@ -14,7 +14,7 @@
 						<!-- 价格组件 -->
 						<price>{{item.price}}</price>
 						<!-- 原价 -->
-						<text class="text-light-muted ml-1">￥{{item.orginPrice}}</text>
+						<text class="text-light-muted ml-1 line-through">￥{{item.orginPrice}}</text>
 					</div>
 				</div>
 			</div>
@@ -30,6 +30,13 @@
 		},
 		props:{
 			resData:Array
+		},
+		methods:{
+			openDetail(){
+				uni.navigateTo({
+					url:'/pages/detail/detail'
+				})
+			}
 		}
 	}
 </script>

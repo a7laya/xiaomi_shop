@@ -25,7 +25,7 @@
 	opacity: .3
 }
 .uni-list-item--hover {
-	background-color: #f1f1f1
+	background-color: #f4f4f4
 }
 .uni-list-item__container {
 	padding: 24rpx 30rpx;

@@ -1,0 +1,1 @@
+<view class="p-2"><view class="font-lg">{{resdata.title}}</view><view class="font text-light-muted mb-3 line-h-sm">{{resdata.desc}}</view><price vue-id="1" priceSize="font-lg" unitSize="font" bind:__l="__l" vue-slots="{{['default']}}">{{resdata.price}}</price></view>

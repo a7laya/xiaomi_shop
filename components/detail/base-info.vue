@@ -1,0 +1,22 @@
+<template>
+	<view class="p-2">
+		<view class="font-lg">{{resdata.title}}</view>
+		<view class="font text-light-muted mb-3 line-h-sm">{{resdata.desc}}</view>
+		<price priceSize="font-lg" unitSize="font">{{resdata.price}}</price>
+	</view>
+</template>
+
+<script>
+	import price from "@/components/common/price.vue"
+	export default {
+		components:{
+			price
+		},
+		props:{
+			resdata: Object
+		}
+	}
+</script>
+
+<style>
+</style>

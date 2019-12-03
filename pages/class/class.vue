@@ -1,5 +1,6 @@
 <template>
 	<view class="d-flex border-top border-light-secondary" style="height: 100%; box-sizing: border-box;">
+		<!-- 页面等待动画  在main.js里面引入了loading.vue组件 -->
 		<loading :show="showLoading"></loading>
 		<scroll-view scroll-y="true" style="flex: 1; height: 100%;"
 		class="border-right border-light-secondary" id="leftScrollView"

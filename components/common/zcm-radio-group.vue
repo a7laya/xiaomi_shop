@@ -7,7 +7,7 @@
 			:class="label.currentIndex == index ? 'radio-active' : ''">
 				{{item.name}}
 			</view>
-		</view>
+		</view> 
 	</view>
 </template>
 
