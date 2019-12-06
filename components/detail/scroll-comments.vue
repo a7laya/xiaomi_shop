@@ -31,10 +31,12 @@
 			</scroll-view>
 		</view>
 		<!-- 更多评论 -->
-		<view class="d-flex flex-row j-center a-center p-2 text-primary " hover-class="bg-light-secondary">
-			<view class="font-md">更多评论</view>
-			<view class="iconfont icon-jiantou"></view>
-		</view>
+		<navigator url="/pages/detail-comment/detail-comment">
+			<view class="d-flex flex-row j-center a-center p-2 text-primary " hover-class="bg-light-secondary">
+				<view class="font-md">更多评论</view>
+				<view class="iconfont icon-jiantou"></view>
+			</view>
+		</navigator>
 	</view>
 </template>
 

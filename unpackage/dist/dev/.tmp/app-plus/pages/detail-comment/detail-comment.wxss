@@ -1,0 +1,18 @@
+
+.divider {
+	height: 18rpx;
+	background: #f5f5f5;
+}
+
+
+.label-bg{
+	background-color: #fee;
+	color: #7B6D6C;
+	border-color: #F4E0E1;
+}
+.label-bg.active{
+	background-color: #FF6B01!important;
+	color: #FFFFFF!important;
+	border-color: #DE7232!important;
+}
+

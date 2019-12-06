@@ -12,12 +12,14 @@
 		<!-- 属性选择 -->
 		<view class="p-2 ">
 			<view class="rounded boder bg-light-secondary">
+				<!-- 商品属性 -->
 				<uni-list-item @tap="show('attr')">
 					<view class="d-flex">
 						<text class="font-md text-muted">已选</text>
 						<text class="font-md ml-1">火焰红 64G 标配</text>
 					</view>
 				</uni-list-item>
+				<!-- 配送信息 -->
 				<uni-list-item @tap="show('express')">
 					<view class="d-flex">
 						<text class="font-md text-muted">配送</text>
@@ -25,6 +27,7 @@
 						<view class="main-text-color">有现货</view>
 					</view>
 				</uni-list-item>
+				<!-- 服务说明 -->
 				<uni-list-item widthExtra="5%"  @tap="show('service')">
 					<view class="d-flex a-center">
 						<text class="iconfont icon-shoujiduihao main-text-color"></text>
@@ -32,7 +35,7 @@
 						<text class="iconfont icon-shoujiduihao main-text-color"></text>
 						<text class="m-1">小米发货</text>
 						<text class="iconfont icon-shoujiduihao main-text-color"></text>
-						<view class="m-1">七天无理由退货</view>
+						<text class="m-1">七天无理由退货</text>
 					</view>
 				</uni-list-item>
 				
@@ -54,7 +57,6 @@
 				:item="item" :index="index"></commonList>
 			</view>
 		</card>
-		
 		<!-- 底部操作条 -->
 		<bottomBtn></bottomBtn>
 		
@@ -346,7 +348,7 @@
 			},
 			
 			
-			// 下面的preview和navigate是 htmlParse组件需要的两个方法
+			// 下面的preview和navigate是 htmlParse组件产生的两个方法
 			preview(src, e) {
 				// do something
 				console.log("src: " + src);
