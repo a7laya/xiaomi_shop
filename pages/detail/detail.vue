@@ -16,7 +16,11 @@
 				<uni-list-item @tap="show('attr')">
 					<view class="d-flex">
 						<text class="font-md text-muted">已选</text>
-						<text class="font-md ml-1">火焰红 64G 标配</text>
+						<text class="font-md ml-1">
+							<text v-for="(item,index) in labels" :key="index" class="ml-1">
+								{{item.list[item.selected].name}}
+							</text>
+						</text>
 					</view>
 				</uni-list-item>
 				<!-- 配送信息 -->
@@ -58,32 +62,36 @@
 			</view>
 		</card>
 		<!-- 底部操作条 -->
-		<bottomBtn></bottomBtn>
+		<bottomBtn @show="show('attr')"></bottomBtn>
 		
-		<!-- 购物车弹出框 -->
+		<!-- 购物车弹出框 进行属性选择 -->
 		<commonPopup :popupClass="popupClass.attr" @hide='hide("attr")'>
 			<!-- 商品信息 H:275rpx -->
 			<view class="d-flex a-center" style="height: 275rpx;">
 				<image src="/static/images/demo/list/1.jpg" mode="widthFix" style="height: 180rpx; width: 180rpx;" class="border rounded"></image>
 				<view class="pl-2">
-					<price priceSize="font-lg" unitSize="font">2399</price>
-					<text class="d-block">火焰红 64GB 标配</text>
+					<price priceSize="font-lg" unitSize="font">{{detail.pprice}}</price>
+					<view class="d-block d-flex">
+						<text v-for="(item,index) in labels" :key="index" class="ml-1">
+							{{item.list[item.selected].name}}
+						</text>
+					</view>
 				</view>
 			</view>
 			<!-- 表单部分 H:660rpx -->
 			<scroll-view scroll-y class="w-100" style="height: 660rpx;">
 				<card :headTitle="item.title" :headTitleWeight="false" :headBorderBottom="false"
 				v-for="(item,index) in labels" :key="index">
-					<zcm-radio-group :label="item" :selected.sync='item.currentIndex'></zcm-radio-group>
+					<zcm-radio-group :label="item" :selected.sync='item.selected'></zcm-radio-group>
 				</card>
 				<view class="d-flex j-sb a-center p-2 border-top border-light-secondary">
 					<text>购买数量{{detail.num}}</text>
-					<uni-number-box :min="1" :value="detail.num" @change="detail.num = $event"></uni-number-box>
+					<uni-number-box :min="detail.minnum" :max="detail.maxnum" :value="detail.num" @change="detail.num = $event"></uni-number-box>
 				</view>
 			</scroll-view>
 			<!-- 按钮 H:100rpx -->
 			<view class="w-100 main-bg-color text-white font-md d-flex j-center a-center position-fixed bottom-0 left-0" 
-			hover-class="main-bg-hover-color" style="height: 100rpx;" @tap.stop="hide('attr')">
+			hover-class="main-bg-hover-color" style="height: 100rpx;" @tap.stop="addCart">
 				加入购物车
 			</view>
 		</commonPopup>
@@ -97,14 +105,14 @@
 			</view>
 			<!-- 表单部分 H:835rpx -->
 			<scroll-view scroll-y class="w-100" style="height: 835rpx;">
-				<uni-list-item v-for="i in 10" :key="i">
-					<view class="iconfont icon-dingwei font-weight font-md">腊鸭{{i}}</view>
-					<view class="font text-light-muted">湖北省武汉市黄陂区</view>
+				<uni-list-item v-for="(item,index) in pathList" :key="index">
+					<view class="iconfont icon-dingwei font-weight font-md">{{item.name}}</view>
+					<view class="font text-light-muted">{{item.path}}{{item.detailPath}}</view>
 				</uni-list-item>
 			</scroll-view>
 			<!-- 按钮 H:100rpx -->
 			<view class="w-100 main-bg-color text-white font-md d-flex j-center a-center position-fixed bottom-0 left-0" 
-			hover-class="main-bg-hover-color" style="height: 100rpx;" @tap.stop="hide('express')">
+			hover-class="main-bg-hover-color" style="height: 100rpx;" @tap.stop="openCreatePath">
 				添加新收货地址
 			</view>
 		</commonPopup>
@@ -167,6 +175,7 @@
 	import zcmRadioGroup  from '@/components/common/zcm-radio-group.vue'
 	import uniNumberBox   from '@/components/uni-ui/uni-number-box/uni-number-box.vue'
 	
+	import { mapState,mapGetters,mapActions,mapMutations } from "vuex"
 	var htmlString = `
 			<p>
 				<img src="https://i8.mifile.cn/v1/a1/9c3e29dc-151f-75cb-b0a5-c423a5d13926.webp">
@@ -185,7 +194,7 @@
 				labels:[
 					{
 						title: "颜色",
-						currentIndex: 0,
+						selected: 0,
 						list: [
 							{ name: '黄色' },
 							{ name: '黑色' },
@@ -194,7 +203,7 @@
 					},
 					{
 						title: "容量",
-						currentIndex: 0,
+						selected: 0,
 						list: [
 							{ name: '64GB' },
 							{ name: '128GB' }
@@ -202,7 +211,7 @@
 					},
 					{
 						title: "套餐",
-						currentIndex: 0,
+						selected: 0,
 						list: [
 							{ name: '标配' },
 							{ name: '套餐一' },
@@ -304,11 +313,14 @@
 					{ src:'/static/images/demo/list/6.jpg' }
 				],
 				detail:{
+					id:23,
 					title: "小米CC 8GB+256GB",
+					cover: '/static/images/demo/list/3.jpg',
 					desc: "1亿像素主摄 / 全场景五摄像头 / 四闪光灯 / 3200万自拍 / 10 倍混合光学变焦，50倍数字变焦 / 5260mAh ⼤电量 / 标配 30W疾速快充 / ⼩米⾸款超薄屏下指纹 / 德国莱茵低蓝光认证 / 多功能NFC / 红外万能遥控 / 1216超线性扬声器",
-					price: 2799,
+					pprice: 2799,
 					num: 1,
-					max: 100
+					minnum: 1,
+					maxnum: 10
 				},
 				baseAttrs: [
 					{ icon:"icon-cpu", title:"CPU", desc:"绞龙845八核" },
@@ -333,18 +345,45 @@
 				}
 			}
 		},
+		computed:{
+			...mapState({
+				list:state => state.cart.list,
+				pathList:state => state.path.list
+			})
+		},
 		methods: {
-			
+			...mapMutations(['addGoodsToCart']),
+			// 加入购物车
+			addCart(){
+				// 组织数据
+				let goods = this.detail
+				goods['checked'] = false
+				goods['attrs'] = this.labels
+				// 加入购物车
+				this.addGoodsToCart(goods)
+				// 隐藏popup
+				this.hide('attr')
+				// 提示加入成功
+				uni.showToast({
+					title: '加入购物车成功'
+				});
+			},
 			// 控制底部弹出框的显示和隐藏
-			hide(className) {
-				this.popupClass[className]='hide'
+			hide(key) {
+				this.popupClass[key]='hide'
 				setTimeout(()=>{
-					this.popupClass[className]="none"
+					this.popupClass[key]="none"
 				}, 200);
 				console.log('mask');
 			},
-			show(className) {
-				this.popupClass[className]='show'
+			show(key) {
+				this.popupClass[key]='show'
+			},
+			openCreatePath() {
+				uni.navigateTo({
+					url: '/pages/user-path-edit/user-path-edit',
+				})
+				this.hide('express')
 			},
 			
 			

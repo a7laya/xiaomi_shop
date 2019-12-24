@@ -1,3 +1,10 @@
 {
-  "usingComponents": {}
+  "titleNView": false,
+  "bounce": "none",
+  "scrollIndicator": "none",
+  "usingComponents": {
+    "divider": "/components/common/divider",
+    "uni-list-item": "/components/uni-ui/uni-list-item/uni-list-item",
+    "card": "/components/common/card"
+  }
 }

@@ -5,7 +5,8 @@
 				<image :src="thumb" class="uni-list-item__icon-img" />
 			</view>
 			<view v-else-if="showExtraIcon" class="uni-list-item__icon">
-				<uni-icons :color="extraIcon.color" :size="extraIcon.size" :type="extraIcon.type" class="uni-icon-wrapper" />
+				<uni-icons v-if="!leftIcon" :color="extraIcon.color" :size="extraIcon.size" :type="extraIcon.type" class="uni-icon-wrapper" />
+				<view v-else-if="leftIcon" class="iconfont" :class="leftIcon" :style="leftIconStyle"></view>
 			</view>
 			<view class="uni-list-item__content">
 				<view class="uni-list-item__content-title">{{ title }}</view>
@@ -14,9 +15,11 @@
 			</view>
 			<view v-if="showBadge || showArrow || showSwitch" class="uni-list-item__extra" 
 			:style="'width:'+widthExtra">
-				<uni-badge v-if="showBadge" :type="badgeType" :text="badgeText" />
-				<switch v-if="showSwitch" :disabled="disabled" :checked="switchChecked" @change="onSwitchChange" />
-				<uni-icons v-if="showArrow" :size="20" class="uni-icon-wrapper" color="#bbb" type="arrowright" />
+				<slot name='right'>
+					<uni-badge v-if="showBadge" :type="badgeType" :text="badgeText" />
+					<switch v-if="showSwitch" :disabled="disabled" :checked="switchChecked" @change="onSwitchChange" />
+					<uni-icons v-if="showArrow" :size="20" class="uni-icon-wrapper" color="#bbb" type="arrowright" />
+				</slot>
 			</view>
 		</view>
 	</view>
@@ -32,6 +35,14 @@
 			uniBadge
 		},
 		props: {
+			leftIcon: {
+				type: String,
+				default: ""
+			},
+			leftIconStyle: {
+				type: String,
+				default: ""
+			},
 			widthExtra: {
 				type: String,
 				default: '25%'

@@ -6,11 +6,16 @@
     "pages/search/search",
     "pages/search-list/search-list",
     "pages/detail/detail",
-    "pages/detail-comment/detail-comment"
+    "pages/detail-comment/detail-comment",
+    "pages/user-set/user-set",
+    "pages/user-userinfo/user-userinfo",
+    "pages/user-path-list/user-path-list",
+    "pages/user-path-edit/user-path-edit",
+    "pages/order/order"
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "我们一起购物吧",
+    "navigationBarTitleText": "uniapp程序测试",
     "navigationBarBackgroundColor": "#FFFFFF",
     "backgroundColor": "#FFFFFF"
   },
@@ -94,7 +99,7 @@
     "autoclose": false
   },
   "appname": "仿小米商城2",
-  "compilerVersion": "2.4.2",
+  "compilerVersion": "2.4.6",
   "usingComponents": {
     "divider": "/components/common/divider",
     "loading": "/components/common/loading"

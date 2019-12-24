@@ -1,5 +1,5 @@
 <template>
-	<view style="width: 372.5upx;">
+	<view style="width: 372.5upx;" @click="openDetail">
 		<image :src="item.cover" mode="widthFix" lazy-load></image>
 		<view class="p-2 pt-1">
 			<view class="font-md">{{item.title}}</view>
@@ -21,6 +21,13 @@
 		props:{
 			item:Object,
 			index:Number
+		},
+		methods:{
+			openDetail(){
+				uni.navigateTo({
+					url:'/pages/detail/detail'
+				})
+			}
 		}
 	}
 </script>

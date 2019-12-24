@@ -65,10 +65,22 @@
 			}
 		}, {
 			"path": "pages/cart/cart",
-			"style": {}
+			"style": {
+				"app-plus":{
+					"titleNView":false,
+					"bounce":"none",
+					"scrollIndicator":"none"
+				}
+			}
 		}, {
 			"path": "pages/my/my",
-			"style": {}
+			"style": {
+				"app-plus":{
+					"titleNView":false,
+					"bounce":"none",
+					"scrollIndicator":"none"
+				}
+			}
 		}
 	    ,{
             "path" : "pages/search/search",
@@ -156,10 +168,64 @@
 				}
 			}
         }
+        ,{
+            "path" : "pages/user-set/user-set",
+            "style" : {
+				"navigationBarTitleText": "用户设置",
+				"app-plus":{
+					
+				}
+			}
+        }
+        ,{
+            "path" : "pages/user-userinfo/user-userinfo",
+            "style" : {
+				"navigationBarTitleText":"修改资料"
+			}
+        }
+        ,{
+            "path" : "pages/user-path-list/user-path-list",
+            "style" : {
+				"navigationBarTitleText":"收货地址",
+				"app-plus":{
+					"bounce":"none",
+					"scrollIndicator":"none",
+					"titleNView":{
+						"buttons":[
+							{
+								"float":"right",
+								"color":"#999999",
+								"colorPressed":"#BBBBBB",
+								"fontSrc":"/static/font/iconfont.ttf",
+								"text":"\ue614",
+								"fontSize":"16"
+							}
+						]
+					}
+				}
+			}
+        }
+        ,{
+            "path" : "pages/user-path-edit/user-path-edit",
+            "style" : {
+				"navigationBarTitleText":"新增收货地址",
+				"app-plus":{
+					"bounce":"none",
+					"scrollIndicator":"none",
+					"titleNView":{
+					}
+				}
+			}
+        }
+        
+        ,{
+            "path" : "pages/order/order",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "我们一起购物吧",
+		"navigationBarTitleText": "uniapp程序测试",
 		"navigationBarBackgroundColor": "#FFFFFF",
 		"backgroundColor": "#FFFFFF"
 	},

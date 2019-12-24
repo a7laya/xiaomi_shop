@@ -1,12 +1,21 @@
 import Vue  from "vue"
 import Vuex from "vuex"
 import cart from "@/store/modules/cart.js"
-import cart2 from "@/store/modules/cart2.js"
+import path from "@/store/modules/path.js"
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
 	modules: {
-		cart,cart2
+		cart,
+		path
 	}
 })
+
+// 页面中的引用
+// import { mapState } from "vuex"
+// computed:{
+// 	...mapState({
+// 		list: state=>state.cart.list
+// 	})
+// }

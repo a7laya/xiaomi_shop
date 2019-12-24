@@ -4,7 +4,7 @@
 		<view class="span24-8 px-2 mb-2" v-for="(item,index) in label.list" :key="index"
 			@click="changeLabel(index)">
 			<view class="rounded border px-2 py-1 bg-light-secondary text-center"
-			:class="label.currentIndex == index ? 'radio-active' : ''">
+			:class="label.selected == index ? 'radio-active' : ''">
 				{{item.name}}
 			</view>
 		</view> 
@@ -18,7 +18,7 @@
 		},
 		methods: {
 			changeLabel(index) {
-				// 子传父 父组件调用:selected.sync='label.currentIndex' 来同步子父通讯
+				// 子传父 父组件调用:selected.sync='label.selected' 来同步子父通讯
 				this.$emit('update:selected', index)
 			}
 		}

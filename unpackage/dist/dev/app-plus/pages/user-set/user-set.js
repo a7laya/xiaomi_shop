@@ -1,0 +1,2 @@
+setCssToHead(["body { background-color: #EEEEEE; }\n",],undefined,{path:"./pages/user-set/user-set.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/user-set/user-set.wxml') } }));

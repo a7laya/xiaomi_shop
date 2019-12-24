@@ -2,7 +2,7 @@
 	<view class="p-2">
 		<view class="font-lg">{{resdata.title}}</view>
 		<view class="font text-light-muted mb-3 line-h-sm">{{resdata.desc}}</view>
-		<price priceSize="font-lg" unitSize="font">{{resdata.price}}</price>
+		<price priceSize="font-lg" unitSize="font">{{resdata.pprice}}</price>
 	</view>
 </template>
 
