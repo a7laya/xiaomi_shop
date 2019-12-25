@@ -33,7 +33,7 @@
 				<view slot='title' class="d-flex a-center j-sb">
 					<text class="font-md font-weight">我的订单</text>
 					<view class="d-flex a-center j-center font text-muted">
-						<text class="">全部订单</text>
+						<text class="" @click="navigate('order')">全部订单</text>
 						<text class="iconfont icon-jiantou"></text>
 					</view>
 				</view>
