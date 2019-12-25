@@ -1,5 +1,5 @@
 <template>
-	<view class="position-absolute w-100 d-flex flex-column j-center a-center" 
+	<view class="w-100 d-flex flex-column j-center a-center" 
 	style="height: 400rpx;">
 		<image :src="getUrl"  mode="widthFix"
 		style="width: 242rpx;"></image>

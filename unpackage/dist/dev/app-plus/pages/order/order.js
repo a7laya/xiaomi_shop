@@ -1,1 +1,2 @@
+setCssToHead([".",[1],"tab-active{ border-bottom: ",[0,5]," solid #FD6801 !important; color: #FD6801 !important; margin-bottom: ",[0,-5],"; }\n",],undefined,{path:"./pages/order/order.wxss"})();
 document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/order/order.wxml') } }));

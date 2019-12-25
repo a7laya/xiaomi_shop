@@ -232,7 +232,7 @@
 								"colorPressed":"#BBBBBB",
 								"fontSrc":"/static/font/iconfont.ttf",
 								"text":"\ue67e",
-								"fontSize":"22"
+								"fontSize":"24"
 							},
 							{
 								"float":"right",
@@ -240,7 +240,7 @@
 								"colorPressed":"#BBBBBB",
 								"fontSrc":"/static/font/iconfont.ttf",
 								"text":"\ue613",
-								"fontSize":"22"
+								"fontSize":"20"
 							}
 						]
 					}
