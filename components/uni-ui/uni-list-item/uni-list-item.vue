@@ -1,6 +1,6 @@
 <template>
 	<view :class="disabled ? 'uni-list-item--disabled' : ''" :hover-class="disabled || showSwitch ? '' : 'uni-list-item--hover'" class="uni-list-item" @click="onClick">
-		<view class="uni-list-item__container">
+		<view class="uni-list-item__container"> 
 			<view v-if="thumb" class="uni-list-item__icon">
 				<image :src="thumb" class="uni-list-item__icon-img" />
 			</view>
@@ -15,10 +15,11 @@
 			</view>
 			<view v-if="showBadge || showArrow || showSwitch" class="uni-list-item__extra" 
 			:style="'width:'+widthExtra">
+				<slot name="rightContent"></slot>
 				<slot name='right'>
 					<uni-badge v-if="showBadge" :type="badgeType" :text="badgeText" />
 					<switch v-if="showSwitch" :disabled="disabled" :checked="switchChecked" @change="onSwitchChange" />
-					<uni-icons v-if="showArrow" :size="20" class="uni-icon-wrapper" color="#bbb" type="arrowright" />
+					<uni-icons v-if="showArrow && showArrowIcon" :size="20" class="uni-icon-wrapper" color="#bbb" type="arrowright" />
 				</slot>
 			</view>
 		</view>
@@ -35,6 +36,11 @@
 			uniBadge
 		},
 		props: {
+			showArrowIcon:{
+				// 是否禁用
+				type: [Boolean, String],
+				default: true
+			},
 			leftIcon: {
 				type: String,
 				default: ""
@@ -199,7 +205,7 @@
 	}
 
 	.uni-list-item__extra {
-		width: 25%;
+		width: 35%;
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-end;

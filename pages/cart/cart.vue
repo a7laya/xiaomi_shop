@@ -72,7 +72,8 @@
 				<view class="flex-1 d-flex a-center j-center font-md">
 					合计 <price unitSize="33" priceSize="44">{{totalPrice}}</price>
 				</view>
-				<view class="flex-1 d-flex a-center j-center main-bg-color" hover-class="main-bg-hover-color">
+				<view class="flex-1 d-flex a-center j-center main-bg-color" hover-class="main-bg-hover-color"
+				@click="orderConfirm">
 					<text class="text-white font-md">结算</text>
 				</view>
 			</template>
@@ -217,6 +218,12 @@
 			...mapActions(['doSelectAll','doDelGoods','doShowPopup','doHidePopup']),
 			changeNum(e,item,index){
 				item.num = e
+			},
+			// 订单结算
+			orderConfirm(){
+				uni.navigateTo({
+					url: '/pages/order-confirm/order-confirm'
+				});
 			}
 		}
 	}

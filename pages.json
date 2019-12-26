@@ -247,6 +247,14 @@
 				}
 			}
         }
+        ,{
+            "path" : "pages/order-confirm/order-confirm",
+            "style" : {
+				"navigationBarTitleText":"订单配送至",
+				"navigationBarBackgroundColor":"#FD6801",
+				"navigationBarTextStyle":"white"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

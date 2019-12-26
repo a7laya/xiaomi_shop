@@ -3,7 +3,7 @@
 		<uni-swipe-action :options="options2" 
 		@click="bindClick($event,index)" 
 		v-for="(item, index) in list" :key="index">
-			<uni-list-item @click="navigate('user-path-edit',index)">
+			<uni-list-item @click="choose(index)">
 				<view class="text-secondary">
 					<view class="d-flex a-center">
 						<text class="main-text-color">{{item.name}}</text>
@@ -27,7 +27,7 @@
 		components:{uniListItem,uniSwipeAction},
 		data() {
 			return {
-				
+				isChoose:false,
 				options2: [
 					{
 						text: '修改',
@@ -44,6 +44,11 @@
 				]
 			}
 		},
+		onLoad(e) {
+			if(e.type === "choose"){
+				this.isChoose = true
+			}
+		},
 		computed:{
 			...mapState({
 				list: state => state.path.list
@@ -51,6 +56,7 @@
 		},
 		methods: {
 			...mapMutations(['createPath','delPath']),
+			// 封装跳转
 			navigate(path,i){
 				if(!path) return
 				let obj = JSON.stringify({
@@ -61,6 +67,20 @@
 				uni.navigateTo({
 					url:`/pages/${path}/${path}?data=${obj}`
 				})
+			},
+			// 点击一个地址选项
+			choose(index){
+				if(this.isChoose){
+					let data =this.list[index]
+					// 通知订单提交页修改地址
+					uni.$emit('choosePath',data)
+					// 关闭当前页面
+					uni.navigateBack({
+						delta:1
+					})
+				} else {
+					this.navigate("user-path-edit",index)
+				}
 			},
 			// i地址list下标
 			bindClick(e, i) {

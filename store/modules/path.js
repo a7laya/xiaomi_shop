@@ -6,7 +6,7 @@ export default {
 				phone: "135****5678",
 				path: "广州市 广州市 白云区",
 				detailPath: "XXXX街道",
-				isDefault: false
+				isDefault: true
 			},
 			{
 				name: "laya2",
@@ -20,7 +20,7 @@ export default {
 				phone: "135****5678",
 				path: "广州市 广州市 白云区",
 				detailPath: "XXXX街道",
-				isDefault: true
+				isDefault: false
 			}
 		]
 	},
