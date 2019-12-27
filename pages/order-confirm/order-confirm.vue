@@ -50,7 +50,7 @@
 			</uni-list-item>
 			<divider></divider>
 			
-			<uni-list-item title="发票" widthExtra="40%">
+			<uni-list-item title="发票" widthExtra="40%" @click="openOrderInvoice">
 				<view slot="rightContent">电子发票-个人</view>
 			</uni-list-item>
 		</view>
@@ -88,6 +88,11 @@
 			openPathList(){
 				uni.navigateTo({
 					url:"/pages/user-path-list/user-path-list?type=choose"
+				})
+			},
+			openOrderInvoice(){
+				uni.navigateTo({
+					url:"/pages/order-invoice/order-invoice"
 				})
 			}
 		},

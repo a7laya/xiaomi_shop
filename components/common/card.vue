@@ -47,7 +47,7 @@
 			},
 			cardStyle:{
 				type:String,
-				default:""
+				default:"background-color:#ffffff"
 			}
 		},
 		computed: {
