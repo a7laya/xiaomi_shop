@@ -11,7 +11,10 @@
     "pages/user-userinfo/user-userinfo",
     "pages/user-path-list/user-path-list",
     "pages/user-path-edit/user-path-edit",
-    "pages/order/order"
+    "pages/order/order",
+    "pages/order-confirm/order-confirm",
+    "pages/order-invoice/order-invoice",
+    "pages/login/login"
   ],
   "window": {
     "navigationBarTextStyle": "black",

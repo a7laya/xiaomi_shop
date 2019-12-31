@@ -8,7 +8,8 @@
 				style="top: 40rpx; right: 20rpx; z-index:1000;"></view>
 				<!-- 头像昵称会员信息 -->
 				<view class="position-absolute w-100 d-flex" 
-				style="top: 120rpx; left: 0rpx; height: 155rpx; z-index:1000;">
+				style="top: 120rpx; left: 0rpx; height: 155rpx; z-index:1000;"
+				@click="navigate('login')">
 					<view class="d-flex j-center a-center" style="flex: 4;">
 						<!-- 头像 -->
 						<image src="/static/images/demo/demo6.jpg" mode="widthFix" 

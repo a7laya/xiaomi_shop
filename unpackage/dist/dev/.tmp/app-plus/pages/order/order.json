@@ -22,8 +22,8 @@
     ]
   },
   "usingComponents": {
-    "divider": "/components/common/divider",
     "nothing": "/components/common/nothing",
-    "common-list": "/components/common/commonList"
+    "common-list": "/components/common/commonList",
+    "order-list": "/components/order/order-list"
   }
 }

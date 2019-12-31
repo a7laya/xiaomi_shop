@@ -1,1 +1,1 @@
-<view class="position-absolute w-100 d-flex flex-column j-center a-center" style="height:400rpx;"><image style="width:242rpx;" src="{{getUrl}}" mode="widthFix"></image><text class="text-light-muted mt-2">{{msg}}</text></view>
+<view class="w-100 d-flex flex-column j-center a-center" style="height:400rpx;"><image style="width:242rpx;" src="{{getUrl}}" mode="widthFix"></image><text class="text-light-muted mt-2">{{msg}}</text></view>

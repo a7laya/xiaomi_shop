@@ -261,6 +261,16 @@
 				"navigationBarTitleText":"发票"
 			}
         }
+        ,{
+            "path" : "pages/login/login",
+            "style" : {
+				"app-plus":{
+					"bounce":"none",
+					"scrollIndicator":"none",
+					"titleNView":false
+				}
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -1,0 +1,2 @@
+setCssToHead(["body{ }\n",],undefined,{path:"./pages/order-confirm/order-confirm.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/order-confirm/order-confirm.wxml') } }));
