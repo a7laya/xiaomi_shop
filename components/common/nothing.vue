@@ -1,6 +1,6 @@
 <template>
 	<view class="w-100 d-flex flex-column j-center a-center" 
-	style="height: 400rpx;">
+	style="height: 400rpx; background-color: #F5F5F5;">
 		<image :src="getUrl"  mode="widthFix"
 		style="width: 242rpx;"></image>
 		<text class="text-light-muted mt-2">{{msg}}</text>

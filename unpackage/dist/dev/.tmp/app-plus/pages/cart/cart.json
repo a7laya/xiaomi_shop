@@ -3,6 +3,7 @@
   "bounce": "none",
   "scrollIndicator": "none",
   "usingComponents": {
+    "loading-plus": "/components/common/mixin/loading-plus",
     "common-list": "/components/common/commonList",
     "zcm-radio-group": "/components/common/zcm-radio-group",
     "card": "/components/common/card",

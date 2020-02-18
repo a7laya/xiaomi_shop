@@ -39,7 +39,7 @@
 			<uni-list-item title="运费" :showArrowIcon="false">
 				<view slot="rightContent">包邮</view>
 			</uni-list-item>
-			<uni-list-item title="优惠券">
+			<uni-list-item title="优惠券" @click="goCoupon">
 				<view slot="rightContent" class="text-light-muted">无可用</view>
 			</uni-list-item>
 			<uni-list-item :showArrowIcon="false">
@@ -63,7 +63,8 @@
 			<price>200.00</price>
 			<view class="main-bg-color px-2 py-1 mx-2 text-white font-md font-weight"
 			hover-class="main-bg-hover-color"
-			style="border-radius: 30rpx">
+			style="border-radius: 30rpx"
+			@click="openPayMethods">
 			去付款
 			</view>
 		</view>
@@ -85,11 +86,25 @@
 			...mapGetters(['defaultPath'])
 		},
 		methods: {
+			// 优惠券页面
+			goCoupon(){
+				uni.navigateTo({
+					url:"../order-coupon/order-coupon"
+				})
+			},
+			// 点击去付款，打开付款方式页面
+			openPayMethods(){
+				uni.navigateTo({
+					url:"/pages/pay-methods/pay-methods"
+				})
+			},
+			// 打开地址列表页
 			openPathList(){
 				uni.navigateTo({
 					url:"/pages/user-path-list/user-path-list?type=choose"
 				})
 			},
+			// 打开发票页
 			openOrderInvoice(){
 				uni.navigateTo({
 					url:"/pages/order-invoice/order-invoice"

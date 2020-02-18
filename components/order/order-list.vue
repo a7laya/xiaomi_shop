@@ -1,5 +1,5 @@
 <template>
-	<view class="">
+	<view class="" @click="openDetail">
 		<divider></divider>
 		<view class="bg-white">
 			<!-- 头部 -->
@@ -8,28 +8,19 @@
 				<text class="main-text-color font-md">{{item.status}}</text>
 			</view>
 			<!-- 身体 -->
-			<view class="px-2">
-				<view class="d-flex a-center border-bottom border-light-secondary p-2"
-				v-for="(order, orderIndex) in item.order_items" :key="orderIndex">
-					<image :src="order.cover" mode="widthFix" class="rounded flex-shrink"
-					style="width: 150rpx; height: 150rpx;"></image>
-					<view class="d-flex flex-column a-start j-center ml-2">
-						<text class="font-md">{{order.title}}</text>
-						<text class="text-light-muted">{{order.attrs}}</text>
-					</view>
-					<view class="d-flex flex-column a-end j-center ml-auto">
-						<text class="text-light-muted">￥{{order.pprice}}</text>
-						<text class="text-light-muted">×{{order.num}}</text>
-					</view>
-				</view>
-			</view>
+			<order-list-item :order="order" v-for="(order, orderIndex) in item.order_items" :key="orderIndex"></order-list-item>
 			<!-- 底部 -->
 			<view class="d-flex flex-column a-end j-center p-2">
 				<view class="py-1">
 					共{{item.total_num}}件商品, 合计: ￥{{item.total_price}}
 				</view>
 				<view class="py-1 d-flex">
-					<view class="px-2 py-1 border rounded text-secondary mr-2" hover-class="bg-light-secondary">
+					<view class="px-2 py-1 border rounded text-secondary mr-2" hover-class="bg-light-secondary"
+					@click.stop="openAfterSale">
+						申请售后
+					</view>
+					<view class="px-2 py-1 border rounded text-secondary mr-2" hover-class="bg-light-secondary"
+					@click.stop="openLogistics">
 						查看物流
 					</view>
 					<view class="px-2 py-1 border rounded text-secondary" hover-class="bg-light-secondary">
@@ -42,7 +33,9 @@
 </template>
 
 <script>
+	import orderListItem from "@/components/order/order-list-item.vue"
 	export default {
+		components:{orderListItem},
 		props:{
 			item:{
 				type: Object,
@@ -51,6 +44,27 @@
                 }
 			},
 			index: Number
+		},
+		methods:{
+			// 查看订单详情
+			openDetail(){
+				uni.navigateTo({
+					url:'../../pages/order-detail/order-detail'
+				})
+			},
+			// 查看物流详情
+			openLogistics(){
+				uni.navigateTo({
+					url:'../../pages/logistics-detail/logistics-detail'
+				})
+			},
+			// 打开申请售后
+			openAfterSale(){
+				uni.navigateTo({
+					url:'../../pages/after-sale/after-sale'
+				})
+			}
+			
 		}
 	}
 </script>

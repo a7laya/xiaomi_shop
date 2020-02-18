@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "新增收货地址",
+  "usingComponents": {
+    "uni-list-item": "/components/uni-ui/uni-list-item/uni-list-item",
+    "mpvue-city-picker": "/components/uni-ui/mpvue-citypicker/mpvueCityPicker"
+  }
+}

@@ -1,6 +1,6 @@
 <template>
 	<view class="card" :style="cardStyle">
-		<!-- head -->
+		<!-- head --> 
 		<view v-if="showhead" class="p-2 main-border-color"
 		:class="getHeadClass">
 			<slot name="title">

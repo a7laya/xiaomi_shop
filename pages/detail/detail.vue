@@ -168,7 +168,7 @@
 	import scrollComments from "@/components/detail/scroll-comments.vue"
 	import uParse         from '@/components/uni-ui/uParse/src/wxParse.vue'
 	import card           from '@/components/common/card.vue'
-	import commonList     from '@/components/common/commonList.vue'
+	import commonList     from '@/components/common/common-list.vue'
 	import bottomBtn      from "@/components/detail/bottom-btn.vue"
 	import commonPopup    from '@/components/common/common-popup.vue'
 	import price          from '@/components/common/price.vue'
@@ -191,6 +191,7 @@
 		components:{uniNumberBox,zcmRadioGroup,price,commonPopup,bottomBtn,commonList,card,swiperImage,baseInfo,scrollAttrs,uniListItem,scrollComments,uParse},
 		data() {
 			return {
+				item: {},
 				labels:[
 					{
 						title: "颜色",
@@ -351,8 +352,20 @@
 				pathList:state => state.path.list
 			})
 		},
+		onLoad(e) {
+			console.log('e:',JSON.parse(e.detail));
+			this.item = JSON.parse(e.detail)
+			this.__init(this.item.id)
+		},
 		methods: {
 			...mapMutations(['addGoodsToCart']),
+			// 初始化页面
+			__init(id) {
+				console.log(id);
+				this.$H.get(`/goods/${id}`).then(res => {
+					console.log("res:", res);
+				})
+			},
 			// 加入购物车
 			addCart(){
 				// 组织数据
