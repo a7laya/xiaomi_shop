@@ -14,7 +14,14 @@
     "pages/order/order",
     "pages/order-confirm/order-confirm",
     "pages/order-invoice/order-invoice",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/pay-methods/pay-methods",
+    "pages/pay-result/pay-result",
+    "pages/order-coupon/order-coupon",
+    "pages/order-detail/order-detail",
+    "pages/logistics-detail/logistics-detail",
+    "pages/after-sale/after-sale",
+    "pages/about/about"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -102,9 +109,10 @@
     "autoclose": false
   },
   "appname": "仿小米商城2",
-  "compilerVersion": "2.4.6",
+  "compilerVersion": "2.5.1",
   "usingComponents": {
     "divider": "/components/common/divider",
-    "loading": "/components/common/loading"
+    "loading": "/components/common/loading",
+    "loading-plus": "/components/common/mixin/loading-plus"
   }
 }

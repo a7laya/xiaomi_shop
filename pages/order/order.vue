@@ -49,7 +49,7 @@
 </template>
 
 <script>
-	import commonList  from '@/components/common/commonList.vue'
+	import commonList  from '@/components/common/common-list.vue'
 	import nothing     from '@/components/common/nothing.vue'
 	import orderList   from '@/components/order/order-list.vue'
 	

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "优惠券",
+  "usingComponents": {
+    "nothing": "/components/common/nothing",
+    "coupon": "/components/order-coupon/coupon"
+  }
+}

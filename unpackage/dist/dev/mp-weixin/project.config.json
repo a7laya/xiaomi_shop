@@ -7,7 +7,7 @@
 		"urlCheck": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.7.0",
+	"libVersion": "2.9.2",
 	"appid": "touristappid",
 	"projectname": "仿小米商城2",
 	"simulatorType": "wechat",

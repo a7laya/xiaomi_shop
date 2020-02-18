@@ -1,0 +1,8 @@
+
+.tab-active{
+	border-bottom: 5rpx solid #FD6801 !important;
+	color: #FD6801 !important;
+	/* margin-bottom: -5rpx; */
+}
+
+

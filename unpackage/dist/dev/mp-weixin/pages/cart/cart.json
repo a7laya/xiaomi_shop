@@ -1,3 +1,11 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "common-list": "/components/common/common-list",
+    "zcm-radio-group": "/components/common/zcm-radio-group",
+    "card": "/components/common/card",
+    "common-popup": "/components/common/common-popup",
+    "uni-number-box": "/components/uni-ui/uni-number-box/uni-number-box",
+    "price": "/components/common/price",
+    "uni-nav-bar": "/components/uni-ui/uni-nav-bar/uni-nav-bar"
+  }
 }

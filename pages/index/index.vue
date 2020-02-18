@@ -1,12 +1,31 @@
 <template>
 	<view>
+		<!-- 在小程序端需要 自定义导航 -->
+		<!-- #ifdef MP -->
+			<view class="d-flex a-center" style="height: 90rpx;">
+				<!-- 左边 -->
+				<view style="width: 85rpx;" class="d-flex a-center j-center">
+					<text class="iconfont icon-62 font-md"></text>
+				</view>
+				<!-- 中间 -->
+				<view class="flex-1 bg-light rounded d-flex a-center text-light-muted" style="height: 65rpx;">
+					<text class="iconfont icon-sousuo mx-2"></text>
+					智能积木 越野四驱2
+				</view>
+				<!-- 右边 -->
+				<view style="width: 85rpx;" class="d-flex a-center j-center">
+					<text class="iconfont icon-saomiao"></text>
+				</view>
+			</view>
+		<!-- #endif -->
+		
+		
 		<!-- 顶部选项卡 -->
 		<scroll-view scroll-x class='scroll-row border-bottom px-2' style="height: 80rpx;"
 		:scroll-into-view="scrollinto" 
-		scroll-with-animation="true"
-		>
-			<view class="scroll-row-item px-2" 
-			style="width: 80rpx; line-height: 80rpx;"
+		scroll-with-animation="true">
+			<view class="scroll-row-item px-3" 
+			style="line-height: 80rpx;"
 			v-for="(item,index) in tabBars" :key='index'
 			:class="tabIndex === index ? 'main-text-color border-bottom' : ''"
 			:id="'tab' + index"
@@ -21,260 +40,65 @@
 			<swiper-item v-for="(item, index) in newsitems" :key="index">
 				<scroll-view scroll-y="true" :style="'height: ' + windowHeight + 'px;'"
 				@scrolltolower="loadMore(index)">
-					<block v-for="(list, listIndex) in item.list" :key="listIndex">
-						<!-- 轮播图 -->
-						<template v-if="list.type === 'swiper'">
-							<swiper-image :resdata="list.data"></swiper-image>
-						</template>
-						
-						<!-- 首页分类 -->
-						<template v-else-if="list.type === 'indexNavs'">
-							<index-nav :resdata="list.data"></index-nav>
-							<divider></divider>
-						</template>
-						
-						<!-- 三图广告 -->
-						<template v-else-if="list.type === 'threeAdvs'">
-							<three-adv :resdata="list.data"></three-adv>
-							<divider></divider>
-						</template>
-						
-						<!-- 大图广告 -->
-						<template v-else-if="list.type === 'oneAdv'">
-							<card :headTitle="list.data.title" :bodyCover="list.data.cover"></card>
-						</template>
-						
-						<!-- 公共列表组件 -->
-						<template v-else-if="list.type === 'commonList'">
-							<view class="row j-sb">
+					<template v-if="item.list.length > 0">
+						<block v-for="(list,listIndex) in item.list" :key="listIndex">
+							<!-- 轮播图组件 -->
+							<swiper-image v-if="list.type === 'swiper'" 
+							:resdata="list.data" />
+							
+							<template  v-else-if="list.type === 'indexnavs'">
+								<!-- 首页分类 -->
+								<index-nav :resdata="list.data" />
+								<divider />
+							</template>
+							
+							<template  v-else-if="list.type === 'threeAdv'">
+								<!-- 三图广告 -->
+								<three-adv :resdata="list.data" />
+								<divider />
+							</template>
+							<!-- 大图广告位 -->
+							<!-- <card headTitle="每日精选" bodyCover="/static/images/demo/demo4.jpg" /> -->
+							
+							<!-- 公共列表组件 750 - 5 = 745   372.5-->
+							<view class="row j-sb" v-else-if="list.type === 'list'">
 								<block v-for="(item2,index2) in list.data" :key="index2">
-									<commonList :item="item2" :index="index2"></commonList>
+									<common-list :item="item2" :index="index2" />
 								</block>
 							</view>
-						</template>
-					</block>
+							 
+						</block>
 					
-					<!-- 上拉加载更多 -->
-					<view class="d-flex j-center a-center py-2">
-						<text class="text-light-muted font-md">{{item.loadingText}}</text>
-					</view>
+						<!-- 上拉加载更多 -->
+						<divider />
+						<view 
+						class="d-flex a-center j-center text-light-muted font-md py-3">
+							{{item.loadingText}}
+						</view>
+					</template>
+					<template v-else-if="item.firstLoad">
+						<view class="d-flex j-center a-center pt-5">
+							<text class="font-md text-light-muted">加载中...</text>
+						</view>
+					</template>
+					<template v-else>
+						<!-- 空数据 -->
+						<view class="d-flex j-center a-center pt-5">
+							<text class="font-md text-light-muted">暂无数据</text>
+						</view>
+					</template>
 				</scroll-view>
 			</swiper-item>
 		</swiper>
 	</view>
 </template>
 <script>
-	// 模拟后端数据
-	let demoTabBar = [
-		{
-			name: '关注',
-			id: 'guanzhu',
-			template: 'index'
-		}, {
-			name: '推荐',
-			id: 'tuijian',
-			template: 'special'
-		}, {
-			name: '体育',
-			id: 'tiyu',
-			template: 'special'
-		}, {
-			name: '热点',
-			id: 'redian',
-			template: 'special'
-		}, {
-			name: '财经',
-			id: 'caijing',
-			template: 'special'
-		}, {
-			name: '娱乐',
-			id: 'yule',
-			template: 'special'
-		}, {
-			name: '军事',
-			id: 'junshi',
-			template: 'special'
-		}, {
-			name: '历史',
-			id: 'lishi',
-			template: 'special'
-		}, {
-			name: '本地',
-			id: 'bendi',
-			template: 'special'
-		}
-	]
-	let demo1 = [
-		{
-			type: "swiper",
-			data: [
-				{ src: "/static/images/demo/demo4.jpg" },
-				{ src: "/static/images/demo/demo5.jpg" },
-				{ src: "/static/images/demo/demo6.jpg" }
-			]
-		},{
-			type: "indexNavs",
-			data: [
-				{ src:"/static/images/indexnav/1.png",text:"新品发布" },
-				{ src:"/static/images/indexnav/2.gif",text:"小米众筹" },
-				{ src:"/static/images/indexnav/3.gif",text:"以旧换新" },
-				{ src:"/static/images/indexnav/4.gif",text:"一分换团" },
-				{ src:"/static/images/indexnav/5.gif",text:"超值特卖" },
-				{ src:"/static/images/indexnav/6.gif",text:"小米秒杀" },
-				{ src:"/static/images/indexnav/7.gif",text:"真心想要" },
-				{ src:"/static/images/indexnav/8.gif",text:"电视热卖" },
-				{ src:"/static/images/indexnav/9.gif",text:"家电热卖" },
-				{ src:"/static/images/indexnav/10.gif",text:"米粉卡" }
-			]
-		},
-		{
-			type: "threeAdvs",
-			data: {
-				big:         { src: "/static/images/demo/demo1.jpg" },
-				smalltop:    { src: "/static/images/demo/demo2.jpg" },
-				smallbottom: { src: "/static/images/demo/demo3.jpg" }
-			}
-		},
-		{
-			type: "oneAdv",
-			data: {
-				title: "每日精选",
-				cover: "/static/images/demo/demo4.jpg"
-			}
-		},{
-			type: "commonList",
-			data: [
-				{
-					cover: "/static/images/demo/list/1.jpg",
-					title: "米家空调",
-					desc: "1.5匹直流变频",
-					price: 1399,
-					orginPrice: 2699
-				},
-				{
-					cover: "/static/images/demo/list/2.jpg",
-					title: "米家空调",
-					desc: "1.5匹直流变频",
-					price: 1399,
-					orginPrice: 2699
-				},
-				{
-					cover: "/static/images/demo/list/3.jpg",
-					title: "米家空调",
-					desc: "1.5匹直流变频",
-					price: 1399,
-					orginPrice: 2699
-				},
-				{
-					cover: "/static/images/demo/list/4.jpg",
-					title: "米家空调",
-					desc: "1.5匹直流变频",
-					price: 1399,
-					orginPrice: 2699
-				},
-				{
-					cover: "/static/images/demo/list/5.jpg",
-					title: "米家空调",
-					desc: "1.5匹直流变频",
-					price: 1399,
-					orginPrice: 2699
-				},
-				{
-					cover: "/static/images/demo/list/6.jpg",
-					title: "米家空调",
-					desc: "1.5匹直流变频",
-					price: 1399,
-					orginPrice: 2699
-				}
-			]
-		}
-	]
-	let demo2 = [
-		{
-			type: "swiper",
-			data: [
-				{ src: "/static/images/demo/demo4.jpg" },
-				{ src: "/static/images/demo/demo5.jpg" },
-				{ src: "/static/images/demo/demo6.jpg" }
-			]
-		},{
-			type: "indexNavs",
-			data: [
-				{ src:"/static/images/indexnav/1.png",text:"新品发布" },
-				{ src:"/static/images/indexnav/2.gif",text:"小米众筹" },
-				{ src:"/static/images/indexnav/3.gif",text:"以旧换新" },
-				{ src:"/static/images/indexnav/4.gif",text:"一分换团" },
-				{ src:"/static/images/indexnav/5.gif",text:"超值特卖" }
-			]
-		},
-		{
-			type: "threeAdvs",
-			data: {
-				big:         { src: "/static/images/demo/demo1.jpg" },
-				smalltop:    { src: "/static/images/demo/demo2.jpg" },
-				smallbottom: { src: "/static/images/demo/demo3.jpg" }
-			}
-		},
-		{
-			type: "oneAdv",
-			data: {
-				title: "每日精选",
-				cover: "/static/images/demo/demo4.jpg"
-			}
-		},{
-			type: "commonList",
-			data: [
-				{
-					cover: "/static/images/demo/list/1.jpg",
-					title: "米家空调",
-					desc: "1.5匹直流变频",
-					price: 1399,
-					orginPrice: 2699
-				},
-				{
-					cover: "/static/images/demo/list/2.jpg",
-					title: "米家空调",
-					desc: "1.5匹直流变频",
-					price: 1399,
-					orginPrice: 2699
-				},
-				{
-					cover: "/static/images/demo/list/3.jpg",
-					title: "米家空调",
-					desc: "1.5匹直流变频",
-					price: 1399,
-					orginPrice: 2699
-				},
-				{
-					cover: "/static/images/demo/list/4.jpg",
-					title: "米家空调",
-					desc: "1.5匹直流变频",
-					price: 1399,
-					orginPrice: 2699
-				},
-				{
-					cover: "/static/images/demo/list/5.jpg",
-					title: "米家空调",
-					desc: "1.5匹直流变频",
-					price: 1399,
-					orginPrice: 2699
-				},
-				{
-					cover: "/static/images/demo/list/6.jpg",
-					title: "米家空调",
-					desc: "1.5匹直流变频",
-					price: 1399,
-					orginPrice: 2699
-				}
-			]
-		}
-	]
-	// import mediaList from '@/components/mediaList.vue';
 	import swiperImage from "@/components/index/swiper-image.vue";
 	import indexNav    from "@/components/index/index-nav.vue";
 	import threeAdv    from "@/components/index/three-adv.vue";
 	import card        from "@/components/common/card.vue";
-	import commonList  from "@/components/common/commonList.vue";
+	import commonList  from "@/components/common/common-list.vue";
+	
 	export default {
 		components: {
 			// mediaList,
@@ -290,17 +114,20 @@
 				windowHeight: 0,
 				tabIndex: 0,
 				tabBars: [],
-				newsitems: []
-				
+				newsitems: [{}]
 			}
 		},
 		// 页面载入的时候加载数据
 		onLoad: function() {
 			// 获取可视区域高度(原生头和底部之外的地方)
 			uni.getSystemInfo({
-				success:(e) => {
+				success:(e) => { 
+					let navbarH = 0
+					// #ifdef MP
+						navbarH = uni.upx2px(90)
+					// #endif
 					// 这里得到的height单位是px
-					this.windowHeight = e.windowHeight - uni.upx2px(81);
+					this.windowHeight = e.windowHeight - uni.upx2px(81) -navbarH;
 				}
 			})
 			
@@ -310,30 +137,39 @@
 		},
 		methods: {
 			// 初始化事件
-			__init() {
+			__init(){
 				// 获取顶部选项卡
-				this.tabBars = demoTabBar
-				// 根据顶部选项卡 生成页面
-				let arr = []
-				for (var i = 0; i < this.tabBars.length; i++) {
-					let obj = {
-						list:[],
-						// 1.上拉加载更多 2.加载中 3.没有更多了
-						loadingText: "上拉加载更多"
+				this.$H.get('/index_category/data').then((res)=>{
+					console.log('请求到的首屏数据：',res);
+					this.tabBars = res.category
+					// 根据顶部选项卡生成页面
+					let arr = []
+					for (var i = 0; i < this.tabBars.length; i++) {
+						// 初始化每个页面的obj
+						let obj = {
+							list:[],
+							// 1.上拉加载更多 2.加载中... 3.没有更多了
+							loadingText: "上拉加载更多",
+							// 是否首次加载
+							firstLoad: true
+						}
+						// 获取首屏数据
+						if (i === 0) {
+							obj.list = res.data
+							obj.firstLoad = false
+						}
+						
+						arr.push(obj)
 					}
-					// 获取首屏数据
-					if( i === 0 ) obj.list = demo1
-					arr.push(obj)
-				}
-				this.newsitems = arr
+					this.newsitems = arr
+				})
 			},
-			
 			// 切换选项卡
 			changeTab(index) {
 				if(this.tabIndex === index) return;
 				this.tabIndex = index;
 				this.scrollinto = 'tab' + index;
-				this.addData();
+				if(this.newsitems[index].firstLoad) this.addData();
 			},
 			
 			// 监听滑动列表
@@ -342,32 +178,52 @@
 			},
 			
 			// 加载数据
-			addData() {
+			async addData(callback = false) {
 				// 拿到当前的索引
 				let index = this.tabIndex
-				// 请求数据
-				this.newsitems[index].list = demo2
+				// 拿到当前对象
+				let obj = this.newsitems[index]
+				// 获取当前分类id
+				let id = this.tabBars[index].id
+				// 获取当前分页数
+				let page = Math.ceil(obj.list.length/5) + 1
 				
+				// 请求数据
+				let data = await this.$H.get(`/index_category/${id}/data/${page}`)
+				console.log('data:',data)
+				// 标记该页面已加载过 -> 非首次加载
+				obj.firstLoad = false
+				// 回调
+				if(typeof callback === 'function') callback()
+				// 请求不到数据 就终止
+				if(!data) return obj.loadingText = "没有更多了"
+				// 追加渲染数据
+				obj.list = [...obj.list, ...data]
+				// 根据获取到的数据条目 -> 没有更多了
+				obj.loadingText = data.length < 5 ? "没有更多了" : "上拉加载更多"
 			},
 			
 			// 上拉加载更多
 			loadMore(index){
 				// 拿到当前对象
-				let item = this.newsitems[index]
+				let obj = this.newsitems[index]
 				// 是否处于可加载状态
-				if(item.loadingText !== "上拉加载更多") return
-				// 模拟加载
-				item.loadingText = "加载中..."
-				if(item.list.length < 20){
-					setTimeout(() => {
-						// 加载数据
-						item.list = [...item.list,...demo2]
-						// 恢复状态
-						item.loadingText = "上拉加载更多"
-					}, 2000);
-				} else {
-					item.loadingText = "没有更多了"
-				}
+				if(obj.loadingText !== "上拉加载更多") return
+				
+				// 先将状态设置为 "加载中..."				
+				obj.loadingText = "加载中..."
+				
+				// 加载数据
+				this.addData(()=>{
+					uni.showToast({
+						title: '加载成功',
+						icon: 'none'
+					});
+				})
+				
+				// 数据加载完毕之后更改状态 "上拉加载更多"/"没有更多了"
+				// todo...（这部分在addData里面完成了）
+
 			},
 			
 			
@@ -392,110 +248,6 @@
 					this.tabIndex = index;
 				}
 			},
-			// 生成随机数据
-			randomfn() {
-				let ary = [
-				];
-				let length = this.tabBars.length;
-				for (let i = 0; i < length; i++) {
-					let aryItem = {
-						loadingText: '加载更多......',
-						data: []
-					};
-					// 给页面添加数据
-					if (this.tabBars[i].template === 'index'){
-						aryItem.data = [
-							{
-								type: "swiper",
-								data: [
-									{ src: "/static/images/demo/demo4.jpg" },
-									{ src: "/static/images/demo/demo5.jpg" },
-									{ src: "/static/images/demo/demo6.jpg" }
-								]
-							},
-							{
-								type: "indexNavs",
-								data: [
-									{ src:"/static/images/indexnav/1.png",text:"新品发布" },
-									{ src:"/static/images/indexnav/2.gif",text:"小米众筹" },
-									{ src:"/static/images/indexnav/3.gif",text:"以旧换新" },
-									{ src:"/static/images/indexnav/4.gif",text:"一分换团" },
-									{ src:"/static/images/indexnav/5.gif",text:"超值特卖" },
-									{ src:"/static/images/indexnav/6.gif",text:"小米秒杀" },
-									{ src:"/static/images/indexnav/7.gif",text:"真心想要" },
-									{ src:"/static/images/indexnav/8.gif",text:"电视热卖" },
-									{ src:"/static/images/indexnav/9.gif",text:"家电热卖" },
-									{ src:"/static/images/indexnav/10.gif",text:"米粉卡" }
-								]
-							},
-							{
-								type: "threeAdvs",
-								data: {
-									big:         { src: "/static/images/demo/demo1.jpg" },
-									smalltop:    { src: "/static/images/demo/demo2.jpg" },
-									smallbottom: { src: "/static/images/demo/demo3.jpg" }
-								}
-							},
-							{
-								type: "oneAdv",
-								data: {
-									title: "每日精选",
-									cover: "/static/images/demo/demo4.jpg"
-								}
-							},
-							{
-								type: "commonList",
-								data: [
-									{
-										cover: "/static/images/demo/list/1.jpg",
-										title: "米家空调",
-										desc: "1.5匹直流变频",
-										price: 1399,
-										orginPrice: 2699
-									},
-									{
-										cover: "/static/images/demo/list/2.jpg",
-										title: "米家空调",
-										desc: "1.5匹直流变频",
-										price: 1399,
-										orginPrice: 2699
-									},
-									{
-										cover: "/static/images/demo/list/3.jpg",
-										title: "米家空调",
-										desc: "1.5匹直流变频",
-										price: 1399,
-										orginPrice: 2699
-									},
-									{
-										cover: "/static/images/demo/list/4.jpg",
-										title: "米家空调",
-										desc: "1.5匹直流变频",
-										price: 1399,
-										orginPrice: 2699
-									},
-									{
-										cover: "/static/images/demo/list/5.jpg",
-										title: "米家空调",
-										desc: "1.5匹直流变频",
-										price: 1399,
-										orginPrice: 2699
-									},
-									{
-										cover: "/static/images/demo/list/6.jpg",
-										title: "米家空调",
-										desc: "1.5匹直流变频",
-										price: 1399,
-										orginPrice: 2699
-									}
-								]
-							}
-						]
-					}
-					ary.push(aryItem);
-				}
-				return ary;
-			}
 		}
 	}
 </script>

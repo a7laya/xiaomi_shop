@@ -12,7 +12,7 @@
 				<view class="uni-list-item__content-title">{{ title }}</view>
 				<view v-if="note" class="uni-list-item__content-note">{{ note }}</view>
 				<slot></slot>
-			</view>
+			</view> 
 			<view v-if="showBadge || showArrow || showSwitch" class="uni-list-item__extra" 
 			:style="'width:'+widthExtra">
 				<slot name="rightContent"></slot>
@@ -34,7 +34,7 @@
 		components: {
 			uniIcons,
 			uniBadge
-		},
+		},  
 		props: {
 			showArrowIcon:{
 				// 是否禁用

@@ -3,12 +3,31 @@
     "pages/index/index",
     "pages/class/class",
     "pages/cart/cart",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/search/search",
+    "pages/search-list/search-list",
+    "pages/detail/detail",
+    "pages/detail-comment/detail-comment",
+    "pages/user-set/user-set",
+    "pages/user-userinfo/user-userinfo",
+    "pages/user-path-list/user-path-list",
+    "pages/user-path-edit/user-path-edit",
+    "pages/order/order",
+    "pages/order-confirm/order-confirm",
+    "pages/order-invoice/order-invoice",
+    "pages/login/login",
+    "pages/pay-methods/pay-methods",
+    "pages/pay-result/pay-result",
+    "pages/order-coupon/order-coupon",
+    "pages/order-detail/order-detail",
+    "pages/logistics-detail/logistics-detail",
+    "pages/after-sale/after-sale",
+    "pages/about/about"
   ],
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "我们一起购物吧",
+    "navigationBarTitleText": "uniapp程序测试",
     "navigationBarBackgroundColor": "#FFFFFF",
     "backgroundColor": "#FFFFFF"
   },
@@ -44,6 +63,10 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap93.json"
+  "usingComponents": {
+    "divider": "/components/common/divider",
+    "loading": "/components/common/loading",
+    "loading-plus": "/components/common/mixin/loading-plus"
+  },
+  "sitemapLocation": "sitemap39.json"
 }
