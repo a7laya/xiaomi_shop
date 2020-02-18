@@ -4,7 +4,7 @@
 		<swiper-image :resdata="banners" height='750' preview></swiper-image>
 		
 		<!-- 基础详情 -->
-		<base-info    :resdata="detail"></base-info>
+		<base-info    :resdata="detail" :show-price='showPrice'></base-info>
 		
 		<!-- 滚动商品特性 w170*h110 -->
 		<scroll-attrs :resdata='baseAttrs'></scroll-attrs>
@@ -270,49 +270,8 @@
 					}
 				],
 				context: htmlString,
-				comments:[
-					{
-						avatar: "/static/images/demo/demo6.jpg",
-						nickname: "哈哈1",
-						create_time: "2019-11-11",
-						goods_num: "128",
-						context: "正在重启，如手机上HBuilder调试基座未启动",
-						imglist:[
-							{ src:"/static/images/demo/cate_03.png" },
-							{ src:"/static/images/demo/cate_04.png" },
-							{ src:"/static/images/demo/cate_05.png" }
-						]
-					},
-					{
-						avatar: "/static/images/demo/demo6.jpg",
-						nickname: "哈哈2",
-						create_time: "2019-11-11",
-						goods_num: "124",
-						context: "正在重启，如手机上HBuilder调试基座未启动",
-						imglist:[
-							{ src:"/static/images/demo/cate_06.png" },
-							{ src:"/static/images/demo/cate_07.png" },
-							{ src:"/static/images/demo/cate_08.png" }
-						]
-					},
-					{
-						avatar: "/static/images/demo/demo6.jpg",
-						nickname: "哈哈3",
-						create_time: "2019-11-11",
-						goods_num: "124",
-						context: "正在重启，如手机上HBuilder调试基座未启动",
-						imglist:[
-							{ src:"/static/images/demo/cate_06.png" },
-							{ src:"/static/images/demo/cate_07.png" },
-							{ src:"/static/images/demo/cate_08.png" }
-						]
-					}
-				],
-				banners:[
-					{ src:'/static/images/demo/list/4.jpg' },
-					{ src:'/static/images/demo/list/5.jpg' },
-					{ src:'/static/images/demo/list/6.jpg' }
-				],
+				comments:[],
+				banners:[],
 				detail:{
 					id:23,
 					title: "小米CC 8GB+256GB",
@@ -323,17 +282,7 @@
 					minnum: 1,
 					maxnum: 10
 				},
-				baseAttrs: [
-					{ icon:"icon-cpu", title:"CPU", desc:"绞龙845八核" },
-					{ icon:"icon-cpu", title:"CPU", desc:"绞龙845八核" },
-					{ icon:"icon-cpu", title:"CPU", desc:"绞龙845八核" },
-					{ icon:"icon-cpu", title:"CPU", desc:"绞龙845八核" },
-					{ icon:"icon-cpu", title:"CPU", desc:"绞龙845八核" },
-					{ icon:"icon-cpu", title:"CPU", desc:"绞龙845八核" },
-					{ icon:"icon-cpu", title:"CPU", desc:"绞龙845八核" },
-					{ icon:"icon-cpu", title:"CPU", desc:"绞龙845八核" },
-					{ icon:"icon-cpu", title:"CPU", desc:"绞龙845八核" }
-				]
+				baseAttrs: []
 			}
 		},
 		// 监听页面返回事件
@@ -350,7 +299,10 @@
 			...mapState({
 				list:state => state.cart.list,
 				pathList:state => state.path.list
-			})
+			}),
+			showPrice(){
+				return this.detail.min_price || 0.00
+			}
 		},
 		onLoad(e) {
 			console.log('e:',JSON.parse(e.detail));
@@ -364,6 +316,52 @@
 				console.log(id);
 				this.$H.get(`/goods/${id}`).then(res => {
 					console.log("res:", res);
+					// 设置标题
+					uni.setNavigationBarTitle({
+						title: res.title
+					})
+					// 轮播图
+					this.banners = res.goodsBanner.map(v => {return {src: '/static/images/demo/list/4.jpg'}})
+					// 初始化基本信息
+					this.detail = res
+					// 滚动商品属性
+					this.baseAttrs = res.goodsAttrs.map(v => {
+						return {
+							icon:"icon-cpu", 
+							title: v.name, 
+							desc: v.value
+						}
+					})
+					// 评论
+					/*
+					{
+						avatar: "/static/images/demo/demo6.jpg",
+						nickname: "哈哈1",
+						create_time: "2019-11-11",
+						goods_num: "128",
+						context: "正在重启，如手机上HBuilder调试基座未启动",
+						imglist:[
+							{ src:"/static/images/demo/cate_03.png" },
+							{ src:"/static/images/demo/cate_04.png" },
+							{ src:"/static/images/demo/cate_05.png" }
+						]
+					}
+					*/
+					this.comments = res.hotComments.map(v => {
+						return {
+							id: v.id,
+							avatar: v.user.avatar,
+							nickname: v.user.nickname,
+							create_time: v.review_time,
+							goods_num: v.goods_num,
+							context: v.review.data,
+							imglist: v.review.image.map(item => {
+								return {
+									src: item
+								}
+							})
+						}
+					})
 				})
 			},
 			// 加入购物车

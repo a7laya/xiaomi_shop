@@ -1,7 +1,8 @@
 export default {
 	// 全局配置
-	common: {
+	common: { 
 		baseUrl: "http://ceshi3.dishait.cn/api",
+		baseUrl: "/test/api",
 		header: {
 			"Content-Type": "application/json;charset=UTF-8",
 			"Content-Type": "application/x-www-form-urlencode"
