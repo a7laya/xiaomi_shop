@@ -12,7 +12,7 @@
 							style="width: 70rpx;height: 70rpx;" class="rounded-circle mr-1"></image>
 							<view class="d-flex flex-column">
 								<text class="font-md boder line-h-md">{{item.nickname}}</text>
-								<text class="text-light-muted line-h-md">{{item.create_time}}</text>
+								<text class="text-light-muted line-h-md">{{item.create_time | formatTime}}</text>
 							</view>
 						</view>
 						<view class="text-light-muted d-flex flex-row a-center">
@@ -24,7 +24,7 @@
 					<view class="p-1 font-md boder line-h-md">{{item.context}}</view>
 					<!-- 下 -->
 					<view class="d-flex flex-row py-1">
-						<image :src="item2.src" class="span24-8 px-1 rounded" 
+						<image :src="item2" class="span24-8 px-1 rounded" 
 						style="height: 210rpx;" v-for="(item2,index2) in item.imglist" :key="index2"></image>
 					</view>
 				</view>
@@ -41,9 +41,16 @@
 </template>
 
 <script>
+	// 引入时间转化库
+	import $T from "@/common/lib/time.js"
 	export default {
 		props:{
 			resdata: Array
+		},
+		filters: {
+			formatTime: function(value) {
+				return $T.gettime(value);
+			}
 		}
 	}
 </script>

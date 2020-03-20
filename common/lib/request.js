@@ -5,7 +5,7 @@ export default {
 		baseUrl: "/test/api",
 		header: {
 			"Content-Type": "application/json;charset=UTF-8",
-			"Content-Type": "application/x-www-form-urlencode"
+			"Content-Type": "application/x-www-form-urlencoded"
 		},
 		data: {},
 		method: "GET",

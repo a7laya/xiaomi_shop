@@ -17,9 +17,7 @@
 					<view class="d-flex">
 						<text class="font-md text-muted">已选</text>
 						<text class="font-md ml-1">
-							<text v-for="(item,index) in labels" :key="index" class="ml-1">
-								{{item.list[item.selected].name}}
-							</text>
+							{{showAttr}}
 						</text>
 					</view>
 				</uni-list-item>
@@ -70,11 +68,9 @@
 			<view class="d-flex a-center" style="height: 275rpx;">
 				<image src="/static/images/demo/list/1.jpg" mode="widthFix" style="height: 180rpx; width: 180rpx;" class="border rounded"></image>
 				<view class="pl-2">
-					<price priceSize="font-lg" unitSize="font">{{detail.pprice}}</price>
+					<price priceSize="font-lg" unitSize="font">{{showPrice}}</price>
 					<view class="d-block d-flex">
-						<text v-for="(item,index) in labels" :key="index" class="ml-1">
-							{{item.list[item.selected].name}}
-						</text>
+						{{showAttr}}
 					</view>
 				</view>
 			</view>
@@ -176,112 +172,23 @@
 	import uniNumberBox   from '@/components/uni-ui/uni-number-box/uni-number-box.vue'
 	
 	import { mapState,mapGetters,mapActions,mapMutations } from "vuex"
-	var htmlString = `
-			<p>
-				<img src="https://i8.mifile.cn/v1/a1/9c3e29dc-151f-75cb-b0a5-c423a5d13926.webp">
-				<img src="https://i8.mifile.cn/v1/a1/f442b971-379f-5030-68aa-3b0accb8c2b9.webp">
-				<img src="https://i8.mifile.cn/v1/a1/63b700b6-643e-ec18-fdf3-da66b4b4173f.webp">
-				<img src="https://i8.mifile.cn/v1/a1/e9dbf276-193e-11c4-99a6-3097fde82350.webp">
-				<img src="https://i8.mifile.cn/v1/a1/1249d3ee-2990-a2b4-28d9-f719c2417b1f.webp">
-				<img src="https://i8.mifile.cn/v1/a1/97c79915-64b2-808c-53b4-4345652a179f.webp">
-				<img src="https://i8.mifile.cn/v1/a1/cd0fbe1e-a1b3-a87a-f4a6-6fb08ec54931.webp">
-			</p>
-	    `
+	
 	export default {
 		components:{uniNumberBox,zcmRadioGroup,price,commonPopup,bottomBtn,commonList,card,swiperImage,baseInfo,scrollAttrs,uniListItem,scrollComments,uParse},
 		data() {
 			return {
 				item: {},
-				labels:[
-					{
-						title: "颜色",
-						selected: 0,
-						list: [
-							{ name: '黄色' },
-							{ name: '黑色' },
-							{ name: '红色' }
-						]
-					},
-					{
-						title: "容量",
-						selected: 0,
-						list: [
-							{ name: '64GB' },
-							{ name: '128GB' }
-						]
-					},
-					{
-						title: "套餐",
-						selected: 0,
-						list: [
-							{ name: '标配' },
-							{ name: '套餐一' },
-							{ name: '套餐二' }
-						]
-					}
-				],
+				labels:[],
 				popupClass: {
 					attr: "none",
 					express: "none",
 					service: "none"
 				},
-				hotList: [
-					{
-						cover: "/static/images/demo/list/1.jpg",
-						title: "米家空调",
-						desc: "1.5匹直流变频",
-						price: 1399,
-						orginPrice: 2699
-					},
-					{
-						cover: "/static/images/demo/list/2.jpg",
-						title: "米家空调",
-						desc: "1.5匹直流变频",
-						price: 1399,
-						orginPrice: 2699
-					},
-					{
-						cover: "/static/images/demo/list/3.jpg",
-						title: "米家空调",
-						desc: "1.5匹直流变频",
-						price: 1399,
-						orginPrice: 2699
-					},
-					{
-						cover: "/static/images/demo/list/4.jpg",
-						title: "米家空调",
-						desc: "1.5匹直流变频",
-						price: 1399,
-						orginPrice: 2699
-					},
-					{
-						cover: "/static/images/demo/list/5.jpg",
-						title: "米家空调",
-						desc: "1.5匹直流变频",
-						price: 1399,
-						orginPrice: 2699
-					},
-					{
-						cover: "/static/images/demo/list/6.jpg",
-						title: "米家空调",
-						desc: "1.5匹直流变频",
-						price: 1399,
-						orginPrice: 2699
-					}
-				],
-				context: htmlString,
+				hotList: [],
+				context: '',
 				comments:[],
 				banners:[],
-				detail:{
-					id:23,
-					title: "小米CC 8GB+256GB",
-					cover: '/static/images/demo/list/3.jpg',
-					desc: "1亿像素主摄 / 全场景五摄像头 / 四闪光灯 / 3200万自拍 / 10 倍混合光学变焦，50倍数字变焦 / 5260mAh ⼤电量 / 标配 30W疾速快充 / ⼩米⾸款超薄屏下指纹 / 德国莱茵低蓝光认证 / 多功能NFC / 红外万能遥控 / 1216超线性扬声器",
-					pprice: 2799,
-					num: 1,
-					minnum: 1,
-					maxnum: 10
-				},
+				detail:{},
 				baseAttrs: []
 			}
 		},
@@ -297,11 +204,21 @@
 		},
 		computed:{
 			...mapState({
-				list:state => state.cart.list,
-				pathList:state => state.path.list
+				list:     state => state.cart.list,
+				pathList: state => state.path.list
 			}),
+			// 显示规格 eg:黄色,套餐一
+			showAttr(){
+				return this.labels.map(v => v.list[v.selected].name).join(',')
+			},
+			// 显示根据规格计算出来的价格
 			showPrice(){
-				return this.detail.min_price || 0.00
+				let skus = this.detail.goodsSkus
+				// 刚进入页面 this.detail里面是空的 防止报错
+				if(skus === undefined) return this.detail.min_price || 0.00
+				// 这里用findIndex效率比较高
+				let index = skus.findIndex(v => this.showAttr === v.skusText)
+				return skus[index].pprice
 			}
 		},
 		onLoad(e) {
@@ -333,34 +250,56 @@
 						}
 					})
 					// 评论
-					/*
-					{
-						avatar: "/static/images/demo/demo6.jpg",
-						nickname: "哈哈1",
-						create_time: "2019-11-11",
-						goods_num: "128",
-						context: "正在重启，如手机上HBuilder调试基座未启动",
-						imglist:[
-							{ src:"/static/images/demo/cate_03.png" },
-							{ src:"/static/images/demo/cate_04.png" },
-							{ src:"/static/images/demo/cate_05.png" }
-						]
-					}
-					*/
 					this.comments = res.hotComments.map(v => {
 						return {
 							id: v.id,
+							user_id: v.user.id,
 							avatar: v.user.avatar,
 							nickname: v.user.nickname,
 							create_time: v.review_time,
 							goods_num: v.goods_num,
 							context: v.review.data,
-							imglist: v.review.image.map(item => {
+							imglist: v.review.image
+						}
+					})
+					
+					// 商品详情
+					this.context = res.content
+					
+					// 热门推荐
+					this.hotList = res.hotList.map(v=>{
+						return {
+							id: v.id,
+							cover: v.cover,
+							title: v.title,
+							desc: v.desc,
+							pprice: v.min_price,
+							oprice: v.min_oprice
+						}
+					})
+					
+					// 商品规格选择
+					this.labels = res.goodsSkusCard.map(v=>{
+						return {
+							id: v.id,
+							title: v.name,
+							selected: 0,
+							list: v.goodsSkusCardValue.map(item=>{
 								return {
-									src: item
+									id: item.id,
+									name: item.value
 								}
 							})
 						}
+					})
+					
+					// 商品规格,匹配价格
+					this.detail.goodsSkus.forEach(item => {
+						let arr = []
+						for (let key in item.skus) {
+							arr.push(item.skus[key].value)
+						}
+						item.skusText = arr.join(',')
 					})
 				})
 			},
